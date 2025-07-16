@@ -1,12 +1,12 @@
 import { Routes, Route } from "react-router-dom";
 
-import LandingPage from "./pages/LandingPage";
-import LoginPage from "./pages/LoginPage";
-import SignUpPage from "./pages/SignUpPage";
-import BuyerDashboard from "./pages/BuyerDashboard";
-import CartPage from "./pages/CartPage";
-import PaymentPage from "./pages/PaymentPage";
-import AnimalDetails from "./pages/AnimalDetails";
+import LandingPage from "./Pages/LandingPage";
+import LoginPage from "./Pages/LoginPage";
+import SignUpPage from "./Pages/SignUpPage";
+import BuyerDashboard from "./Pages/BuyerDashboard";
+import CartPage from "./Pages/CartPage";
+import PaymentPage from "./Pages/PaymentPage";
+import AnimalDetails from "./Pages/AnimalDetails";
 
 function App() {
   return (
@@ -23,3 +23,5 @@ function App() {
 }
 
 export default App;
+
+
