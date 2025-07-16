@@ -8,7 +8,7 @@ function BuyerDashboard() {
         Welcome back! Here are some featured animals for you:
       </p>
       <ul className="list-disc list-inside space-y-2 text-gray-800">
-        <li className="font-semibold">Dog - Golden Retriever</li>
+        <li className="font-semibold">Dog - Mutina</li>
         <li className="font-semibold">Cat - Persian</li>
         <li className="font-semibold">Bird - Parrot</li>
       </ul>
