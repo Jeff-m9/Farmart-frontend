@@ -8,6 +8,7 @@ import CartPage from "./Pages/CartPage";
 import PaymentPage from "./Pages/PaymentPage";
 import AnimalDetails from "./Pages/AnimalDetails";
 import AboutUs from "./Pages/AboutUs";
+import BrowseAnimals from "./Pages/BrowseAnimals";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
       <Route path="/cart" element={<CartPage />} />
       <Route path="/payment" element={<PaymentPage />} />
       <Route path="/about" element={<AboutUs />} />
+      <Route path="/browse" element={<BrowseAnimals />} />
       <Route path="/animal/:id" element={<AnimalDetails />} />
     </Routes>
   );

@@ -55,7 +55,7 @@ function LandingPage() {
         <div className="space-x-8">
           {[
             ["/learn-more", "Learn More"],
-            ["/browse", "Browse Animals"],
+            ["/animals", "Browse Animals"],
             ["/cart", "My Cart"],
           ].map(([path, label]) => (
             <Link
