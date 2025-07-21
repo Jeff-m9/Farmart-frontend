@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
+
 
 function SignUpPage() {
   const [firstName, setFirstName] = useState("");
@@ -50,14 +49,11 @@ function SignUpPage() {
     <div className="flex w-full h-screen overflow-hidden">
       {" "}
       <div
-        className="w-1/2 h-full  bg-cover bg-center"
-        style={{
-          backgroundImage:
-            "url('https://m.media-amazon.com/images/I/71sMAdTu6yS._UF1000,1000_QL80_.jpg')",
-        }}
+        className="w-1/2 h-full bg-cover bg-center"
+        style={{ backgroundImage: `url(${newSignUpImage})` }}
       >
         <div className="h-full flex items-center justify-center">
-          <h1 className="text-amber-600 text-4xl font-bold">
+          <h1 className="text-black text-4xl font-bold">
             Welcome To FarmArt
           </h1>
         </div>
