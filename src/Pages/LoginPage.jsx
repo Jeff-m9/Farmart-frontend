@@ -13,7 +13,7 @@ function LoginPage() {
 
 
   return (
-    <div className="min-h-screen bg-custom-red flex items-center justify-center px-4">
+    <div className="min-h-screen  flex items-center justify-center px-4">
       <div className="bg-app-gradient   p-8 h-96 rounded-3xl shadow-black shadow-2xl w-full max-w-md">
         <h1 className="text-2xl font-bold text-black-800 mb-2 text-center">
           Welcome to Farmart

@@ -8,11 +8,6 @@ export default {
   ],
   theme: {
     extend: {
-      colors: {
-        'custom-red': '#FF0000',
-        'custom-blue': '#0000FF',
-        'farmart-green': '#4CAF50',
-      },
       backgroundImage: {
         'gradi-green-fade': 'linear-gradient(180deg, #89FB17 13.5%, #8BFB30 32.19%, #91FD80 92.5%)',
       },
