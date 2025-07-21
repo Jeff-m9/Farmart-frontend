@@ -1,4 +1,14 @@
 @import "tailwindcss";
+@import "tailwindcss/utilities";
+
+/* Custom gradient as a utility */
+@layer utilities {
+  .bg-app-gradient {
+    background-image: linear-gradient(to bottom, #89FB17, #8BFB30, #91FD80);
+  }
+}
+
+
 
 /* :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
