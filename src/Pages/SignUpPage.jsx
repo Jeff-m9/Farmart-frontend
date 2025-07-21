@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 function SignUpPage() {
   const [firstName, setFirstName] = useState("");
@@ -8,21 +10,40 @@ function SignUpPage() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
-  const handleSubmit = (e) => {
+  const navigate = useNavigate();
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (password !== confirmPassword) {
       alert("Passwords do not match!");
       return;
     }
     const formData = {
-      firstName,
-      lastName,
-      email,
-      phoneNumber,
-      password,
+      first_name: firstName,
+      last_name: lastName,
+      email: email,
+      phone_number: phoneNumber,
+      password: password,
     };
-    console.log("Sign Up Data:", formData);
-    alert(`Signing up with email: ${email}`);
+    try {
+      const res = await fetch("http://127.0.0.1:5000/signup", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      if (!res.ok) throw new Error("Signup failed");
+
+      const data = await res.json();
+      localStorage.setItem("token", data.token);
+
+      toast.success("Signup successful!", {
+        position: "top-center",
+        autoClose: 3000,
+      });
+      navigate("/dashboard");
+    } catch (err) {
+      toast.error("Signup error: " + err.message);
+    }
   };
 
   return (
