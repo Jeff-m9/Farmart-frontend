@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const initialAnimals = [
   {
@@ -141,6 +142,11 @@ function BrowseAnimals() {
   return (
     <div className="max-w-5xl mx-auto mt-12 p-6">
       <h1 className="text-3xl font-bold mb-6 text-center">Browse Animals</h1>
+      <Link to="/animals/add">
+        <button className="px-4 py-2 bg-green-700 text-white rounded hover:bg-green-800 font-bold">
+          <h1>Post Animal</h1>
+        </button>
+      </Link>
 
       <CategoryList
         onSelectCategory={setCategoryFilter}

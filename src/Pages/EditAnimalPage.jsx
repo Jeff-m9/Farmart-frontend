@@ -40,7 +40,7 @@ function EditAnimalPage() {
     const data = await res.json();
     if (res.ok) {
       alert("Animal updated!");
-      navigate("/dashboard"); // or wherever you go
+      navigate("/browse"); 
     } else {
       alert(data.message || "Failed to update animal");
     }
