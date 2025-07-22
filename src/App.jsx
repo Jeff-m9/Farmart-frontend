@@ -11,11 +11,12 @@ import AboutUs from "./Pages/AboutUs";
 import BrowseAnimals from "./Pages/BrowseAnimals";
 import AddAnimalPage from "./Pages/AddAnimalPage";
 import EditAnimalPage from "./Pages/EditAnimalPage";
-
+import MyCart from "./Pages/MyCart";
 
 function App() {
   return (
     <Routes>
+      <Route path="/cart" element={<MyCart />} />
       <Route path="/" element={<LandingPage />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/signup" element={<SignUpPage />} />
