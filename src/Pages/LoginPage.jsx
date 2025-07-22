@@ -9,21 +9,28 @@ function LoginPage() {
     alert(`Logging in with email: ${email}`);
   };
 
-
-
-
   return (
-    <div className="min-h-screen  flex items-center justify-center px-4">
-      <div className="bg-app-gradient   p-8 h-96 rounded-3xl shadow-black shadow-2xl w-full max-w-md">
-        <h1 className="text-2xl font-bold text-black-800 mb-2 text-center">
+    <div className="min-h-screen bg-[#f1f8e9] flex items-center justify-center px-4">
+      <div className="bg-[#f4f9eb] p-8 rounded-2xl shadow-lg w-full max-w-md">
+        <h1 className="text-3xl font-bold text-center text-green-800 mb-1">
           Welcome to Farmart
         </h1>
-        <h2 className="flex justify-center text-2xl font-bold text-black-500">LOG IN</h2>
-        <p className="text-center mt-2 mb-2">Dont have an account? <a className=" text-white underline" href="/signup">Sign Up</a></p>
+        <h2 className="text-xl font-semibold text-center text-gray-600 mb-4">
+          Log In
+        </h2>
+        <p className="text-center text-sm text-gray-500 mb-6">
+          Don’t have an account?{" "}
+          <a
+            className="text-green-700 hover:underline font-medium"
+            href="/signup"
+          >
+            Sign Up
+          </a>
+        </p>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-black mb-1">
+            <label className="block text-sm font-medium text-gray-700 mb-1">
               Email
             </label>
             <input
@@ -32,11 +39,11 @@ function LoginPage() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              className="w-full px-4 py-2 bg-white border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-600"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-black mb-1">
+            <label className="block text-sm font-medium text-gray-700 mb-1">
               Password
             </label>
             <input
@@ -45,12 +52,12 @@ function LoginPage() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
-              className="w-full px-4 py-2 bg-white border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-600"
             />
           </div>
           <button
             type="submit"
-            className="w-full bg-green-500  shadow-xl text-white py-2 rounded-3xl hover:bg-green-800 transition"
+            className="w-full bg-green-700 hover:bg-green-800 text-white font-semibold py-2 rounded-3xl transition shadow"
           >
             Log In
           </button>
