@@ -46,7 +46,7 @@ const initialAnimals = [
 
 const categories = [
   { name: "All Animals" },
-
+  { name: "Sheep" },
   { name: "Cow" },
   { name: "Dog" },
   { name: "Rabbit" },
