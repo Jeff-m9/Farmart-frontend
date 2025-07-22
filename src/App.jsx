@@ -9,6 +9,9 @@ import PaymentPage from "./Pages/PaymentPage";
 import AnimalDetails from "./Pages/AnimalDetails";
 import AboutUs from "./Pages/AboutUs";
 import BrowseAnimals from "./Pages/BrowseAnimals";
+import AddAnimalPage from "./Pages/AddAnimalPage";
+import EditAnimalPage from "./Pages/EditAnimalPage";
+
 
 function App() {
   return (
@@ -20,6 +23,8 @@ function App() {
       <Route path="/cart" element={<CartPage />} />
       <Route path="/payment" element={<PaymentPage />} />
       <Route path="/about" element={<AboutUs />} />
+      <Route path="/animals/add" element={<AddAnimalPage />} />
+      <Route path="/animals/edit/:id" element={<EditAnimalPage />} />
       <Route path="/browse" element={<BrowseAnimals />} />
       <Route path="/animal/:id" element={<AnimalDetails />} />
     </Routes>
