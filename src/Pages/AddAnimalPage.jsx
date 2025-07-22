@@ -10,7 +10,7 @@ function AddAnimalPage() {
     description: "",
     image: "",
     price: "",
-    category_id: "",
+    category: "",
   });
 
   const handleChange = (e) => {
@@ -45,34 +45,41 @@ function AddAnimalPage() {
   };
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="max-w-xl mx-auto p-6 bg-white rounded shadow mt-8"
-    >
-      <h2 className="text-2xl font-bold mb-4">Post New Animal</h2>
-      {[
-        "name",
-        "breed",
-        "age",
-        "description",
-        "image",
-        "price",
-        "category_id",
-      ].map((field) => (
-        <input
-          key={field}
-          name={field}
-          placeholder={field.replace("_", " ").toUpperCase()}
-          value={form[field]}
-          onChange={handleChange}
-          required
-          className="block w-full mb-4 p-2 border border-gray-300 rounded"
-        />
-      ))}
-      <button className="bg-green-700 text-white px-4 py-2 rounded hover:bg-green-700">
-        Post Animal
-      </button>
-    </form>
+    <div className="min-h-screen bg-[#f1f8e9] flex items-center justify-center px-4 py-12">
+      <form
+        onSubmit={handleSubmit}
+        className="w-full max-w-xl bg-[#eaf5d5] p-8 rounded-2xl shadow-lg"
+      >
+        <h2 className="text-3xl font-bold mb-6 text-center text-green-800">
+          Post New Animal
+        </h2>
+        {[
+          "name",
+          "breed",
+          "age",
+          "description",
+          "image",
+          "price",
+          "category",
+        ].map((field) => (
+          <input
+            key={field}
+            name={field}
+            placeholder={field.replace("_", " ").toUpperCase()}
+            value={form[field]}
+            onChange={handleChange}
+            required
+            className="block w-full mb-4 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-600"
+          />
+        ))}
+        <button
+          type="submit"
+          className="w-full bg-green-700 hover:bg-green-800 text-white font-semibold py-2 rounded-3xl transition shadow"
+        >
+          Post Animal
+        </button>
+      </form>
+    </div>
   );
 }
 
