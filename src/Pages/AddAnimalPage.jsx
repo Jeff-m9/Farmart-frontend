@@ -34,7 +34,7 @@ function AddAnimalPage() {
       const data = await res.json();
       if (res.ok) {
         alert("Animal posted successfully!");
-        navigate("/dashboard"); // or wherever
+        navigate("/dashboard"); 
       } else {
         alert(data.message || "Failed to post animal");
       }
