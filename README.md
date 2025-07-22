@@ -78,8 +78,8 @@ Farmart’s interface is designed with accessibility in mind, ensuring smooth ex
 
 ##  Team
 
+- Edian Nyambura
 - Edna Wayua  
-- Edian Nyambura  
 - Godwin Thuranira  
 - Jeff Mbithi  
 - Vincent Kimani
