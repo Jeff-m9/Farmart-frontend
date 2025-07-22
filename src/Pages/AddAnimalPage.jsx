@@ -34,7 +34,7 @@ function AddAnimalPage() {
       const data = await res.json();
       if (res.ok) {
         alert("Animal posted successfully!");
-        navigate("/dashboard"); 
+        navigate("/dashboard");
       } else {
         alert(data.message || "Failed to post animal");
       }
@@ -69,7 +69,7 @@ function AddAnimalPage() {
           className="block w-full mb-4 p-2 border border-gray-300 rounded"
         />
       ))}
-      <button className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">
+      <button className="bg-green-700 text-white px-4 py-2 rounded hover:bg-green-700">
         Post Animal
       </button>
     </form>

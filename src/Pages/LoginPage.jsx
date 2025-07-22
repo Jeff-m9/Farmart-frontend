@@ -10,17 +10,20 @@ function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-4 bg-gray-100">
-      <div className="bg-gradient-to-b from-[#f7f9e9] to-[#e9f1dc] p-8 rounded-3xl shadow-2xl w-full max-w-md">
-        <h1 className="text-3xl font-bold text-center text-gray-800 mb-1">
+    <div className="min-h-screen bg-[#f1f8e9] flex items-center justify-center px-4">
+      <div className="bg-[#f4f9eb] p-8 rounded-2xl shadow-lg w-full max-w-md">
+        <h1 className="text-3xl font-bold text-center text-green-800 mb-1">
           Welcome to Farmart
         </h1>
         <h2 className="text-xl font-semibold text-center text-gray-600 mb-4">
           Log In
         </h2>
-        <p className="text-center text-sm text-gray-500 mb-4">
+        <p className="text-center text-sm text-gray-500 mb-6">
           Don’t have an account?{" "}
-          <a className="text-green-700 hover:underline" href="/signup">
+          <a
+            className="text-green-700 hover:underline font-medium"
+            href="/signup"
+          >
             Sign Up
           </a>
         </p>
@@ -36,7 +39,7 @@ function LoginPage() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500"
+              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-600"
             />
           </div>
           <div>
@@ -49,7 +52,7 @@ function LoginPage() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
-              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500"
+              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-600"
             />
           </div>
           <button
