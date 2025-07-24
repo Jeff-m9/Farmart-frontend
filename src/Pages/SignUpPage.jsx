@@ -75,6 +75,15 @@ function SignUpPage() {
           <h1 className="text-2xl font-bold text-green-800 mb-6 text-center">
             Sign Up
           </h1>
+          <p className="text-1xl font-semibold text-green-800 ">
+            Already have an account?
+            <a
+              className="text-green-700 hover:underline font-medium ml-2"
+              href="/login"
+            >
+              Login
+            </a>
+          </p>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="grid grid-cols-2">
               <div>
