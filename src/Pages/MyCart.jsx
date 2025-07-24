@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 function MyCart() {
@@ -10,7 +10,7 @@ function MyCart() {
 
   const fetchCart = async () => {
     try {
-      const res = await fetch("/cart", {
+      const res = await fetch("http://127.0.0.1:5000/cart", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -37,7 +37,7 @@ function MyCart() {
   const updateQuantity = async (animal_id, quantity) => {
     if (quantity < 1) return removeItem(animal_id);
 
-    const res = await fetch("/cart", {
+    const res = await fetch(`http://127.0.0.1:5000/cart/${animal_id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -54,7 +54,7 @@ function MyCart() {
   };
 
   const removeItem = async (animal_id) => {
-    const res = await fetch("/cart", {
+    const res = await fetch(`http://127.0.0.1:5000/cart/${animal_id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
