@@ -19,10 +19,12 @@ function LoginPage() {
       });
 
       const data = await res.json();
+      console.log(data)
 
       if (res.ok) {
         toast.success("Logged in successfully!");
-        localStorage.setItem("token", data.access_token);
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("user", JSON.stringify(data.user));
         navigate("/dashboard");
       } else {
         setError(data.errors || { message: errorData.message });

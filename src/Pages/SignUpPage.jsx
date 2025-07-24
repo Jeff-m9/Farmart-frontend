@@ -41,6 +41,7 @@ function SignUpPage() {
       if (!res.ok) throw new Error(data.message || "Signup failed");
 
       localStorage.setItem("token", data.access_token);
+      localStorage.setItem("user", JSON.stringify(data.user));
 
       toast.success("Signup successful!", {
         position: "top-center",
