@@ -13,6 +13,13 @@ function SignUpPage() {
   const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
+    // Email validation
+    const emailRegex = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
+    if (!emailRegex.test(email)) {
+      toast.error("Please enter a valid email address");
+      return;
+    }
+
     if (password !== confirmPassword) {
       alert("Passwords do not match!");
       return;
@@ -30,11 +37,10 @@ function SignUpPage() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
-
-      if (!res.ok) throw new Error("Signup failed");
-
       const data = await res.json();
-      localStorage.setItem("token", data.token);
+      if (!res.ok) throw new Error(data.message || "Signup failed");
+
+      localStorage.setItem("token", data.access_token);
 
       toast.success("Signup successful!", {
         position: "top-center",
@@ -114,10 +120,11 @@ function SignUpPage() {
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
                 Phone Number
+                <p>Kindly use the 712345678 format</p>
               </label>
               <input
                 type="number"
-                placeholder="+254712345678"
+                placeholder="712345678"
                 value={phoneNumber}
                 onChange={(e) => setPhoneNumber(e.target.value)}
                 required
