@@ -15,6 +15,10 @@ function MyCart() {
           Authorization: `Bearer ${token}`,
         },
       });
+      if (res.status === 401) {
+        navigate("/login");
+        return;
+      }
 
       const data = await res.json();
       if (res.ok) {
@@ -45,6 +49,10 @@ function MyCart() {
       },
       body: JSON.stringify({ animal_id, quantity }),
     });
+    if (res.status === 401) {
+      navigate("/login");
+      return;
+    }
 
     if (res.ok) {
       fetchCart();
@@ -62,6 +70,10 @@ function MyCart() {
       },
       body: JSON.stringify({ animal_id }),
     });
+    if (res.status === 401) {
+      navigate("/login");
+      return;
+    }
 
     if (res.ok) {
       fetchCart();
