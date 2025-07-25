@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 function MyCart() {
   const [cartItems, setCartItems] = useState([]);
@@ -24,11 +25,11 @@ function MyCart() {
       if (res.ok) {
         setCartItems(data);
       } else {
-        alert(data.message || "Failed to load cart");
+        toast.error(data.message || "Failed to load cart");
       }
     } catch (err) {
       console.error(err);
-      alert("Error fetching cart");
+      toast.error(data.message || "Failed to Fetch cart data");
     } finally {
       setLoading(false);
     }
@@ -57,7 +58,7 @@ function MyCart() {
     if (res.ok) {
       fetchCart();
     } else {
-      alert("Failed to update quantity");
+      toast.error("Failed to update quantity");
     }
   };
 
@@ -78,7 +79,7 @@ function MyCart() {
     if (res.ok) {
       fetchCart();
     } else {
-      alert("Failed to remove item");
+      toast.error("Failed to remove item");
     }
   };
 
