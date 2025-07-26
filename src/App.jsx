@@ -11,7 +11,7 @@ import AboutUs from "./Pages/AboutUs";
 import BrowseAnimals from "./Pages/BrowseAnimals";
 import AddAnimalPage from "./Pages/AddAnimalPage";
 import EditAnimalPage from "./Pages/EditAnimalPage";
-import MyCart from "./Pages/MyCart";
+import Profile from "./Pages/Profile";
 
 function App() {
   return (
@@ -21,6 +21,7 @@ function App() {
       <Route path="/login" element={<LoginPage />} />
       <Route path="/signup" element={<SignUpPage />} />
       <Route path="/dashboard" element={<BuyerDashboard />} />
+      <Route path="/profile" element={<Profile />} />
       <Route path="/cart" element={<CartPage />} />
       <Route path="/payment" element={<PaymentPage />} />
       <Route path="/about" element={<AboutUs />} />

@@ -64,6 +64,13 @@ function BuyerDashboard() {
               alt="Cart"
             />
           </Link>
+          <Link to="/profile" aria-label="View shopping cart">
+            <img
+              src="/src/images/user_attributes_24dp_1F1F1F_FILL1_wght500_GRAD0_opsz48.svg"
+              alt="Cart"
+              className="h-8"
+            />
+          </Link>
         </div>
       </header>
 
