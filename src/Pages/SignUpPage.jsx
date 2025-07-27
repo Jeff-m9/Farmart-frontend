@@ -9,6 +9,9 @@ function SignUpPage() {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [role, setRole] = useState(
+    localStorage.getItem("signup_role") || "user"
+  );
 
   const navigate = useNavigate();
   const handleSubmit = async (e) => {
@@ -30,13 +33,13 @@ function SignUpPage() {
       email: email,
       phone_number: phoneNumber,
       password: password,
+      role: role,
     };
     try {
       const res = await fetch("http://127.0.0.1:5000/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${accessToken}`,
         },
         body: JSON.stringify(formData),
       });

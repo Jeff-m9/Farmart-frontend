@@ -12,6 +12,7 @@ import BrowseAnimals from "./Pages/BrowseAnimals";
 import AddAnimalPage from "./Pages/AddAnimalPage";
 import EditAnimalPage from "./Pages/EditAnimalPage";
 import Profile from "./Pages/Profile";
+import ChooseRolePage from "./Pages/ChooseRolePage";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
       {/* <Route path="/cart" element={<MyCart />} />  */}
       <Route path="/" element={<LandingPage />} />
       <Route path="/login" element={<LoginPage />} />
+      <Route path="/choose-role" element={<ChooseRolePage />} />
       <Route path="/signup" element={<SignUpPage />} />
       <Route path="/dashboard" element={<BuyerDashboard />} />
       <Route path="/profile" element={<Profile />} />

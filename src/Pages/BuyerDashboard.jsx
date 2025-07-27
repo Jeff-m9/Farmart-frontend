@@ -7,20 +7,28 @@ function BuyerDashboard() {
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [searchTerm, setSearchTerm] = useState("");
 
   const onSelectCategory = (category) => {
     setSelectedCategory(category);
   };
 
-  const filteredAnimals = selectedCategory
-    ? animals.filter((animal) => animal.name === selectedCategory)
-    : animals;
+  const filteredAnimals = animals.filter((animal) => {
+    const matchesCategory = selectedCategory
+      ? animal.name === selectedCategory
+      : true;
+    const matchesSearch = searchTerm
+      ? animal.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        animal.breed.toLowerCase().includes(searchTerm.toLowerCase())
+      : true;
+    return matchesCategory && matchesSearch;
+  });
+
 
   useEffect(() => {
     fetch("http://localhost:5000/animals")
       .then((res) => res.json())
       .then((data) => {
-        console.log(data)
         setAnimals(data);
         setLoading(false);
       })
@@ -56,6 +64,8 @@ function BuyerDashboard() {
           <input
             type="text"
             placeholder="Search..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
             className="p-1 border border-gray-300 rounded-2xl bg-white text-black"
           />
           <Link to="/cart" aria-label="View shopping cart">

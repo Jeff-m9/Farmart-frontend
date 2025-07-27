@@ -16,7 +16,6 @@ function LoginPage() {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-         // Authorization: `Bearer ${accessToken}`, 
          },
         body: JSON.stringify({ email, password }),
       });
@@ -30,7 +29,7 @@ function LoginPage() {
         localStorage.setItem("user", JSON.stringify(data.user));
         navigate("/dashboard");
       } else {
-        setError(data.errors || { message: errorData.message });
+        setError(data.errors || { message: data.message });
         toast.error(data.message || "Login failed");
       }
     } catch (err) {

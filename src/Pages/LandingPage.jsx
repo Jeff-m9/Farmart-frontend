@@ -29,7 +29,7 @@ function LandingPage() {
             LogIn
           </Link>
           <Link
-            to="/signup"
+            to="/choose-role"
             className="hover:underline hover:text-green-300 transition px-2 py-1"
           >
             SignUp
