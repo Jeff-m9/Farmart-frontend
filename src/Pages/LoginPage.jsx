@@ -16,8 +16,8 @@ function LoginPage() {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${accessToken}`,
-        },
+         // Authorization: `Bearer ${accessToken}`, 
+         },
         body: JSON.stringify({ email, password }),
       });
 
@@ -34,6 +34,7 @@ function LoginPage() {
         toast.error(data.message || "Login failed");
       }
     } catch (err) {
+      console.error(err); // This will print the error in the browser console
       toast.error("Something went wrong. Please try again.");
     }
   };
