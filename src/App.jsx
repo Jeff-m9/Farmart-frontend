@@ -30,7 +30,7 @@ function App() {
       <Route path="/animals/add" element={<AddAnimalPage />} />
       <Route path="/animals/edit/:id" element={<EditAnimalPage />} />
       <Route path="/browse" element={<BrowseAnimals />} />
-      <Route path="/animal/:id" element={<AnimalDetails />} />
+      <Route path="/animals/:id" element={<AnimalDetails />} />
     </Routes>
   );
 }
