@@ -7,10 +7,16 @@ import App from "./App";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+
+import { CartProvider } from "./Pages/CartContext";
+
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <BrowserRouter>
-      <App />
+     
+      <CartProvider>
+        <App />
+      </CartProvider>
     </BrowserRouter>
     <ToastContainer />
   </React.StrictMode>
