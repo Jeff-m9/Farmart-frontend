@@ -13,6 +13,7 @@ import AddAnimalPage from "./Pages/AddAnimalPage";
 import EditAnimalPage from "./Pages/EditAnimalPage";
 import Profile from "./Pages/Profile";
 import ChooseRolePage from "./Pages/ChooseRolePage";
+import EditProfile from "./Pages/EditProfilePage";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
       <Route path="/signup" element={<SignUpPage />} />
       <Route path="/dashboard" element={<BuyerDashboard />} />
       <Route path="/profile" element={<Profile />} />
+      <Route path="/edit-profile" element={<EditProfile />} />
       <Route path="/cart" element={<CartPage />} />
       <Route path="/payment" element={<PaymentPage />} />
       <Route path="/about" element={<AboutUs />} />
