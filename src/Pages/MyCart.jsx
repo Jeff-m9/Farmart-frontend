@@ -35,8 +35,7 @@ function MyCart() {
     }
   };
 
-  useEffect(() => {
-    fetchCart();
+  useEffect( () => { fetchCart();
   }, []);
 
   const updateQuantity = async (animal_id, quantity) => {

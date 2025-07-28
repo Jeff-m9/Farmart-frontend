@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useCart } from "./CartContext";
+import Navbar from "../components/navbar";
 
 const fallbackAnimals = [
   {
@@ -79,6 +80,7 @@ function BrowseAnimals() {
 
   return (
     <div className="max-w-6xl mx-auto mt-12 p-6 relative">
+      <Navbar/>
       <h1 className="text-3xl font-bold mb-6 text-center">Browse Animals</h1>
 
       <input

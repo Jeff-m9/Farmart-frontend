@@ -6,12 +6,13 @@ import { BrowserRouter } from "react-router-dom";
 import App from "./App";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+import { AuthProvider } from "./context/AuthContext";
 
 import { CartProvider } from "./Pages/CartContext";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
+    <AuthProvider>
     <BrowserRouter>
      
       <CartProvider>
@@ -19,5 +20,6 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       </CartProvider>
     </BrowserRouter>
     <ToastContainer />
+    </AuthProvider>
   </React.StrictMode>
 );
