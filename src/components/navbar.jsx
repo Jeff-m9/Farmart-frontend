@@ -1,10 +1,16 @@
 import  {Link} from 'react-router-dom'
 import {useAuth} from '../context/AuthContext'
+import {useCart} from '../Pages/CartContext'
+import {ShoppingCart} from 'lucide-react'
+  
 
 
 export default function Navbar(){
  
  const {user,logout} =useAuth();
+const {cart} =useCart();
+
+
 
  const handleSearch =(e)=>{
   e.preventDefault();
@@ -17,7 +23,7 @@ console.log("Search",query)
 
   return (
     
-    <nav className='flex justify-between items-center p-4 bg-green-700/90 '>
+    <nav className='flex justify-between items-center w-full p-4 bg-green-700/90'>
       <Link to="/" className='text-2xl font-bold text-white' >FarmMart</Link>
     
     {user ?(
@@ -33,7 +39,15 @@ console.log("Search",query)
         />
         <button className='absolute right-2' type='submit'  >🔍</button>
       </form>
-      <Link to='./browse'>Browse animals</Link>
+      <Link to='/browse'>Browse animals</Link>
+      <Link to='./cart' className='relative'>
+      <ShoppingCart className="w-6 h-6"/>
+      {cart.length > 0 && (
+      <span className='absolute -top-2 -right-2 bg-red-500 text-xs rounded-full flex items-center justify-center'>
+        {cart.length}
+      </span>
+      )}
+      </Link>
       <button onClick={logout}>Logout</button>
       </>
     ) : (

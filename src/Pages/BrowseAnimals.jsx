@@ -78,9 +78,10 @@ function BrowseAnimals() {
     return item ? item.quantity || 1 : 0;
   };
 
-  return (
+  return (<>
+  <Navbar/>
     <div className="max-w-6xl mx-auto mt-12 p-6 relative">
-      <Navbar/>
+     
       <h1 className="text-3xl font-bold mb-6 text-center">Browse Animals</h1>
 
       <input
@@ -156,6 +157,7 @@ function BrowseAnimals() {
         </Link>
       )}
     </div>
+    </>
   );
 }
 
