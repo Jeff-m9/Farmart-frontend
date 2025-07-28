@@ -53,7 +53,11 @@ function SignUpPage() {
         position: "top-center",
         autoClose: 3000,
       });
-      navigate("/dashboard");
+      if (data.user.role === "farmer") {
+        navigate("/farmer-dashboard")
+      } else {
+        navigate("/dashboard")
+      }
     } catch (err) {
       toast.error("Signup error: " + err.message);
     }

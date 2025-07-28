@@ -29,7 +29,11 @@ function LoginPage() {
       if (res.ok) {
         toast.success("Logged in successfully!");
         await login(data.user, data.token); // ✅ Use the correct login function
-        navigate("/dashboard"); // ✅ Redirect only after context is updated
+        if (data.user.role === "farmer") {
+          navigate("/farmer-dashboard")
+        } else (
+          navigate("/dashboard")
+        ) // ✅ Redirect only after context is updated
       } else {
         setError(data.errors || { message: data.message });
         toast.error(data.message || "Login failed");

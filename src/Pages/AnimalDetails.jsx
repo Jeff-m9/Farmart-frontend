@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useCart } from "./CartContext";
+import { jwtDecode } from "jwt-decode";
 
 const fallbackAnimals = [
   {
@@ -47,6 +48,8 @@ function AnimalDetails() {
   const [animal, setAnimal] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [currentUserId, setCurrentUserId] = useState(null);
+  const navigate = useNavigate()
 
   const { addToCart, removeFromCart, isInCart } = useCart();
 
@@ -71,6 +74,18 @@ function AnimalDetails() {
         setLoading(false);
       });
   }, [id]);
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      try {
+        const decoded = jwtDecode(token);
+        setCurrentUserId(parseInt(decoded.sub));
+      } catch (err) {
+        console.error("Invalid token", err);
+      }
+    }
+  }, []);
 
   if (loading) {
     return <div className="text-center mt-10">Loading...</div>;
@@ -118,6 +133,14 @@ function AnimalDetails() {
             className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
           >
             Remove from Cart
+          </button>
+        )}
+        {animal.user_id === currentUserId && (
+          <button
+            onClick={() => navigate(`/animals/edit/${animal.id}`)}
+            className="text-white bg-blue-600 px-4 py-2 rounded hover:bg-blue-700"
+          >
+            Edit animal
           </button>
         )}
       </div>

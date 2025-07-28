@@ -9,6 +9,7 @@ import ChooseRolePage from "./Pages/ChooseRolePage";
 import BuyerDashboard from "./Pages/BuyerDashboard";
 import Profile from "./Pages/Profile";
 import EditProfile from "./Pages/EditProfilePage";
+import FarmerDashboard from "./Pages/FarmerDashboard";
 import CartPage from "./Pages/CartPage";
 import PaymentPage from "./Pages/PaymentPage";
 import AboutUs from "./Pages/AboutUs";
@@ -37,7 +38,8 @@ function App() {
         {/* Protected-only routes */}
         <Route element={<ProtectedRoute />}>
           <Route path="/dashboard" element={<BuyerDashboard />} />
-          <Route path="/profile" element={<Profile />} />
+          <Route path="/farmer-dashboard" element={<FarmerDashboard />} />
+      <Route path="/profile" element={<Profile />} />
           <Route path="/edit-profile" element={<EditProfile />} />
           <Route path="/cart" element={<CartPage />} />
           <Route path="/payment" element={<PaymentPage />} />

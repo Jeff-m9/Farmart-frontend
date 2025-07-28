@@ -63,9 +63,10 @@ function EditProfile() {
       const result = await res.json();
       if (!res.ok) throw new Error(result.message || "Update failed");
 
-      localStorage.setItem("user", JSON.stringify(result.user));
-      toast.success("Profile updated successfully!");
-      navigate("/profile");
+      localStorage.removeItem("token");
+      localStorage.removeItem("user");
+      toast.success("Profile updated. Please log in again.");
+      navigate("/login");
     } catch (err) {
       toast.error("Update failed: " + err.message);
     }

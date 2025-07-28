@@ -1,16 +1,17 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 function AddAnimalPage() {
   const navigate = useNavigate();
   const [form, setForm] = useState({
     name: "",
     breed: "",
-    age: "",
+    age: 0,
     description: "",
     image: "",
-    price: "",
-    category: "",
+    price: 0,
+    category_id: 0,
   });
 
   const [categories, setCategories] = useState([]);
@@ -35,7 +36,16 @@ function AddAnimalPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const token = localStorage.getItem("access_token");
+    const token = localStorage.getItem("token");
+    const payload = {
+      name: form.name,
+      breed: form.breed,
+      age: (form.age),
+      description: form.description,
+      image: form.image,
+      price: (form.price),
+      category_id: (form.category_id),
+    };
 
     try {
       const res = await fetch("http://localhost:5000/animals", {
@@ -44,19 +54,19 @@ function AddAnimalPage() {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify(form),
+        body: JSON.stringify(payload),
       });
 
       const data = await res.json();
       if (res.ok) {
-        alert("Animal posted successfully!");
+        toast.success("Animal added successfully!");
         navigate("/dashboard");
       } else {
-        alert(data.message || "Failed to post animal");
+        toast.error("Animal addition failed");
       }
     } catch (err) {
       console.error("Error:", err);
-      alert("Server error");
+      toast.error("Something went wrong. Please try again.");
     }
   };
 
