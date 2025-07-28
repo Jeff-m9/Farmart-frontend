@@ -16,13 +16,12 @@ const navigate =useNavigate();
 
  const handleSearch =(e)=>{
   e.preventDefault();
-console.log("Search",search)
 //conncet later
 navigate(`/browse?name=${search}`)
 
 
  }
-console.log("current User is ",user)
+
 
   return (
     
