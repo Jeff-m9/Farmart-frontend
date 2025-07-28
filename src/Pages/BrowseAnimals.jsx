@@ -79,7 +79,7 @@ function BrowseAnimals() {
   };
 
   return (<>
-  <Navbar/>
+
     <div className="max-w-6xl mx-auto mt-12 p-6 relative">
      
       <h1 className="text-3xl font-bold mb-6 text-center">Browse Animals</h1>
