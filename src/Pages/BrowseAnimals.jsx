@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useCart } from "./CartContext";
 
 const fallbackAnimals = [
@@ -45,9 +45,18 @@ const fallbackAnimals = [
 function BrowseAnimals() {
   const [animals, setAnimals] = useState([]);
   const [filter, setFilter] = useState("");
-
   const { cart, addToCart, removeFromCart } = useCart();
+  const location = useLocation();
 
+  // 🟨 Extract search query from URL
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const searchParam = params.get("name") || "";
+    console.log("🔍 Search param from URL:", searchParam);
+    setFilter(searchParam);
+  }, [location.search]);
+
+  // 🟦 Fetch animals and merge with fallback
   useEffect(() => {
     fetch("http://localhost:5000/animals")
       .then((res) => {
@@ -60,9 +69,11 @@ function BrowseAnimals() {
           new Map(combined.map((a) => [a.id, a])).values()
         );
         setAnimals(uniqueAnimals);
+        console.log("✅ Animals fetched and combined:", uniqueAnimals);
       })
       .catch(() => {
         setAnimals(fallbackAnimals);
+        console.warn("⚠️ Using fallback animals due to fetch failure");
       });
   }, []);
 
@@ -77,12 +88,11 @@ function BrowseAnimals() {
     return item ? item.quantity || 1 : 0;
   };
 
-  return (<>
-
+  return (
     <div className="max-w-6xl mx-auto mt-12 p-6 relative">
-     
       <h1 className="text-3xl font-bold mb-6 text-center">Browse Animals</h1>
 
+      {/* 🧪 Live input for testing, updates filter manually */}
       <input
         type="text"
         placeholder="Search by name, breed, or description"
@@ -156,7 +166,6 @@ function BrowseAnimals() {
         </Link>
       )}
     </div>
-    </>
   );
 }
 

@@ -2,21 +2,23 @@ import  {Link} from 'react-router-dom'
 import useAuth from '../context/useAuth'
 import {useCart} from '../Pages/CartContext'
 import {ShoppingCart} from 'lucide-react'
-  
+import { useNavigate } from 'react-router-dom'
+import { useState } from 'react'
 
 
 export default function Navbar(){
  
  const {user,logout} =useAuth();
 const {cart} =useCart();
-
-
+const [results, setResults] = useState([]);
+const [search,setSearch] =useState([])
+const navigate =useNavigate();
 
  const handleSearch =(e)=>{
   e.preventDefault();
-const query=e.target.search.value
-console.log("Search",query)
+console.log("Search",search)
 //conncet later
+navigate(`/browse?name=${search}`)
 
 
  }
@@ -35,7 +37,10 @@ console.log("current User is ",user)
         <input  
         type="text"
         name="search"
+        value={search}
         placeholder="Search animals ..."
+        onChange={(e)=> setSearch(e.target.value)}
+
         className="w-full px-4 py-2 border bg-white rounded-full focus:outline-none focus:ring-2 focus:ring-green-500"
 
         />
@@ -68,7 +73,7 @@ console.log("current User is ",user)
     
     : (
       <>
-      <Link to="/login">Login</Link>
+      <Link to="./login">Login</Link>
       <Link to="/signup">Sign up</Link>
       </>
     )
