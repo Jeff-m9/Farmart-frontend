@@ -1,12 +1,15 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import useAuth from "../context/useAuth";
 
 function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
   const navigate = useNavigate();
+
+  const { login } = useAuth(); // ✅ Grab the login function from AuthContext
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -16,24 +19,23 @@ function LoginPage() {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-         },
+        },
         body: JSON.stringify({ email, password }),
       });
 
       const data = await res.json();
-      console.log(data)
+      console.log(data);
 
       if (res.ok) {
         toast.success("Logged in successfully!");
-        localStorage.setItem("token", data.token);
-        localStorage.setItem("user", JSON.stringify(data.user));
-        navigate("/dashboard");
+        await login(data.user, data.token); // ✅ Use the correct login function
+        navigate("/dashboard"); // ✅ Redirect only after context is updated
       } else {
         setError(data.errors || { message: data.message });
         toast.error(data.message || "Login failed");
       }
     } catch (err) {
-      console.error(err); // This will print the error in the browser console
+      console.error(err);
       toast.error("Something went wrong. Please try again.");
     }
   };
@@ -49,10 +51,7 @@ function LoginPage() {
         </h2>
         <p className="text-center text-sm text-gray-500 mb-6">
           Don’t have an account?{" "}
-          <a
-            className="text-green-700 hover:underline font-medium"
-            href="/signup"
-          >
+          <a className="text-green-700 hover:underline font-medium" href="/signup">
             Sign Up
           </a>
         </p>
