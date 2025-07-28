@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useCart } from "./CartContext";
-import Navbar from "../components/navbar";
 
 const fallbackAnimals = [
   {

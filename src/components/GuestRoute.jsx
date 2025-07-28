@@ -1,7 +1,9 @@
-import {Navigate} from 'react-router-dom'
-import {useAuth} from '../context/AuthContext'
+import { Navigate, Outlet } from "react-router-dom";
+import useAuth from "../context/useAuth";
 
-export default function GuestRoute({children}){
-const {user} =useAuth()
-return !user ?children : <Navigate to='/dashboard'/>
+function GuestRoute() {
+  const { user } = useAuth();
+  return !user ? <Outlet /> : <Navigate to="/dashboard" />;
 }
+
+export default GuestRoute;

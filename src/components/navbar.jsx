@@ -1,5 +1,5 @@
 import  {Link} from 'react-router-dom'
-import {useAuth} from '../context/AuthContext'
+import useAuth from '../context/useAuth'
 import {useCart} from '../Pages/CartContext'
 import {ShoppingCart} from 'lucide-react'
   
@@ -18,28 +18,34 @@ const query=e.target.search.value
 console.log("Search",query)
 //conncet later
 
- }
 
+ }
+console.log("current User is ",user)
 
   return (
     
-    <nav className='flex justify-between items-center w-full p-4 bg-green-700/90'>
-      <Link to="/" className='text-2xl font-bold text-white' >FarmMart</Link>
+    <nav className='flex justify-between items-center space-x-4 w-full p-4 bg-green-700/90'>
+      <Link to="/" className='text-4xl font-extrabold text-white' >FarmMart</Link>
     
     {user ?(
       <>
-      <Link to='/dashboard' className=''>Dashboard</Link>
-      <form onSubmit={handleSearch} className='flex relative items-center'> 
+        <div className='flex justify-centre items-center space-x-3 font-bold text-black '>
+      <Link to='/dashboard' className=''>Home</Link>
+      <form onSubmit={handleSearch} className='flex relative items-center' > 
         <input  
         type="text"
         name="search"
         placeholder="Search animals ..."
-        className="w-full px-4 py-2 border rounded-full focus:outline-none focus:ring-2 focus:ring-green-500"
+        className="w-full px-4 py-2 border bg-white rounded-full focus:outline-none focus:ring-2 focus:ring-green-500"
 
         />
         <button className='absolute right-2' type='submit'  >🔍</button>
       </form>
       <Link to='/browse'>Browse animals</Link>
+      </div>
+
+
+      <div className='flex justify-between items-centre space-x-2'>
       <Link to='./cart' className='relative'>
       <ShoppingCart className="w-6 h-6"/>
       {cart.length > 0 && (
@@ -48,9 +54,19 @@ console.log("Search",query)
       </span>
       )}
       </Link>
+      <Link to="/profile" aria-label="View shopping cart">
+            <img
+              src="/src/images/user_attributes_24dp_1F1F1F_FILL1_wght500_GRAD0_opsz48.svg"
+              alt="Cart"
+              className="h-8"
+            />
+          </Link>
       <button onClick={logout}>Logout</button>
+      </div>
       </>
-    ) : (
+    ) 
+    
+    : (
       <>
       <Link to="/login">Login</Link>
       <Link to="/signup">Sign up</Link>

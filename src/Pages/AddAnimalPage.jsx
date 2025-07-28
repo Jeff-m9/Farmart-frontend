@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 function AddAnimalPage() {
@@ -12,6 +12,22 @@ function AddAnimalPage() {
     price: "",
     category: "",
   });
+
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const res = await fetch("http://localhost:5000/categories");
+        const data = await res.json();
+        setCategories(data);
+      } catch (error) {
+        console.error("Failed to fetch categories:", error);
+      }
+    };
+
+    fetchCategories();
+  }, []);
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -53,25 +69,34 @@ function AddAnimalPage() {
         <h2 className="text-3xl font-bold mb-6 text-center text-green-800">
           Post New Animal
         </h2>
-        {[
-          "name",
-          "breed",
-          "age",
-          "description",
-          "image",
-          "price",
-          "category",
-        ].map((field) => (
+
+        {["name", "breed", "age", "description", "image", "price"].map((field) => (
           <input
             key={field}
             name={field}
-            placeholder={field.replace("_", " ").toUpperCase()}
+            placeholder={field.toUpperCase()}
             value={form[field]}
             onChange={handleChange}
             required
             className="block w-full mb-4 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-600"
           />
         ))}
+
+        <select
+          name="category"
+          value={form.category}
+          onChange={handleChange}
+          required
+          className="block w-full mb-4 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-600"
+        >
+          <option value="">Select Category</option>
+          {categories.map((cat) => (
+            <option key={cat.id} value={cat.name}>
+              {cat.name}
+            </option>
+          ))}
+        </select>
+
         <button
           type="submit"
           className="w-full bg-green-700 hover:bg-green-800 text-white font-semibold py-2 rounded-3xl transition shadow"

@@ -8,6 +8,7 @@ function MyCart() {
   const navigate = useNavigate();
 
   const token = localStorage.getItem("token");
+const user = JSON.parse(localStorage.getItem("user"));
 
   const fetchCart = async () => {
     try {
@@ -37,6 +38,18 @@ function MyCart() {
 
   useEffect( () => { fetchCart();
   }, []);
+
+
+
+const handlePayment=async()=>{
+  const phone =user.phone 
+  try {
+    const res
+  }
+}
+
+
+
 
   const updateQuantity = async (animal_id, quantity) => {
     if (quantity < 1) return removeItem(animal_id);
