@@ -84,43 +84,37 @@ function FarmerDashboard() {
         </div>
 
         {/* Categories + Search */}
-        <div className="flex justify-between items-center mb-8 px-6 flex-wrap gap-4">
-          {/* Category Buttons */}
-          <div className="flex space-x-4 flex-wrap">
-            {categories.map((category) => (
-              <button
-                key={category.id}
-                onClick={() => onSelectCategory(category)}
-                className={`flex flex-col items-center space-y-1 p-3 rounded shadow transition ${
-                  selectedCategory?.id === category.id
-                    ? "bg-green-400 text-white"
-                    : "bg-green-100 text-green-700 hover:bg-green-200"
-                }`}
-                aria-pressed={selectedCategory?.id === category.id}
-              >
-                <div className="text-5xl">{category.icon}</div>
-                <div className="font-semibold">{category.name}</div>
-              </button>
-            ))}
-            <button
-              onClick={() => onSelectCategory(null)}
-              className="px-4 py-2 rounded shadow bg-gray-300 hover:bg-gray-400 text-gray-800"
+        <div className="flex flex-col-reverse sm:flex-row sm:justify-end sm:items-center px-6 space-y-4 sm:space-y-0 sm:space-x-4 mt-3">
+          <input
+            type="text"
+            placeholder="Search..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="p-2 border border-gray-300 rounded-2xl bg-white text-black w-full sm:w-[200px]"
+          />
+          <div className="flex flex-col space-y-2 sm:space-y-0 sm:flex-row sm:items-center sm:space-x-4">
+            <select
+              onChange={(e) => {
+                const selectedId = parseInt(e.target.value);
+                const selected = categories.find(
+                  (cat) => cat.id === selectedId
+                );
+                onSelectCategory(selected || null);
+              }}
+              value={selectedCategory?.id || ""}
+              className="p-3 rounded bg-green-100 text-green-700 shadow focus:outline-none focus:ring-2 focus:ring-green-400"
             >
-              Clear Filter
-            </button>
-          </div>
-
-          {/* Search Input */}
-          <div className="flex space-x-4 w-full sm:w-auto">
-            <input
-              type="text"
-              placeholder="Search..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="p-2 border border-gray-300 rounded-2xl bg-white text-black w-full sm:w-[200px]"
-            />
+              <option value="">Filter Category</option>
+              {categories.map((category) => (
+                <option key={category.id} value={category.id}>
+                  {category.name}
+                </option>
+              ))}
+            </select>
             <Link to="/animals/add">
-              <p className="text-black font-bold text-2xl">Add Animal</p>
+              <p className="p-3 rounded bg-green-100 text-green-700 shadow focus:outline-none focus:ring-2 focus:ring-green-400">
+                Add Animal
+              </p>
             </Link>
           </div>
         </div>
