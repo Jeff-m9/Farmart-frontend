@@ -16,14 +16,13 @@ import BrowseAnimals from "./Pages/BrowseAnimals";
 import AddAnimalPage from "./Pages/AddAnimalPage";
 import EditAnimalPage from "./Pages/EditAnimalPage";
 import AnimalDetails from "./Pages/AnimalDetails";
-import Header from "./components/Header";
+
 
 // Layout wrapper
 function AppLayout({ children }) {
   return (
     <>
-      <Header />
-      {children}
+
     </>
   );
 }
