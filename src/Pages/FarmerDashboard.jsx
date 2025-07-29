@@ -77,76 +77,52 @@ function FarmerDashboard() {
 
   return (
     <div className="min-h-screen bg-[#f1f8e9] font-sans flex flex-col">
-      {/* Header */}
-      <header className="bg-green-700/90 text-white flex justify-between items-center px-12 py-4 shadow-md sticky top-0 z-50 backdrop-blur-sm">
-        <div className="text-5xl font-extrabold tracking-wider py-2">
-          FarMart
-        </div>
-        <div className="flex items-center gap-4 mr-10">
-          <Link
-            to="/"
-            className="hover:underline hover:text-green-300 transition"
-          >
-            Home
-          </Link>
-          <input
-            type="text"
-            placeholder="Search..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            className="p-1 border border-gray-300 rounded-2xl bg-white text-black"
-          />
-          <Link to="/animals/add">
-            <p className="text-black font-bold">Add Animal</p>
-          </Link>
-          <Link to="/cart" aria-label="View shopping cart">
-            <img
-              src="/src/images/shopping_cart_24dp_1F1F1F_FILL1_wght400_GRAD200_opsz24.svg"
-              alt="Cart"
-              title="Cart"
-            />
-          </Link>
-          <Link to="/profile">
-            <img
-              src="/src/images/user_attributes_24dp_1F1F1F_FILL1_wght500_GRAD0_opsz48.svg"
-              alt="Profile"
-              title="Profile"
-              className="h-8"
-            />
-          </Link>
-        </div>
-      </header>
-
       <main className="flex-grow">
         {/* Carousel */}
         <div className="h-28 bg-[#f1f8e9] font-sans flex flex-col">
           <ImageCarousel />
         </div>
 
-        {/* Categories */}
-        <div className=" flex space-x-6 mb-4 mt-4 justify-center">
-          {categories
-            .map((category) => (
+        {/* Categories + Search */}
+        <div className="flex justify-between items-center mb-8 px-6 flex-wrap gap-4">
+          {/* Category Buttons */}
+          <div className="flex space-x-4 flex-wrap">
+            {categories.map((category) => (
               <button
-                key={category.id || category.name} // fallback if no id
+                key={category.id}
                 onClick={() => onSelectCategory(category)}
                 className={`flex flex-col items-center space-y-1 p-3 rounded shadow transition ${
-                  selectedCategory?.name === category.name
+                  selectedCategory?.id === category.id
                     ? "bg-green-400 text-white"
                     : "bg-green-100 text-green-700 hover:bg-green-200"
                 }`}
-                aria-pressed={selectedCategory?.name === category.name}
+                aria-pressed={selectedCategory?.id === category.id}
               >
                 <div className="text-5xl">{category.icon}</div>
                 <div className="font-semibold">{category.name}</div>
               </button>
             ))}
-          <button
-            onClick={() => onSelectCategory(null)}
-            className="px-4 py-2 rounded shadow bg-gray-300 hover:bg-gray-400 text-gray-800"
-          >
-            Clear Filter
-          </button>
+            <button
+              onClick={() => onSelectCategory(null)}
+              className="px-4 py-2 rounded shadow bg-gray-300 hover:bg-gray-400 text-gray-800"
+            >
+              Clear Filter
+            </button>
+          </div>
+
+          {/* Search Input */}
+          <div className="flex space-x-4 w-full sm:w-auto">
+            <input
+              type="text"
+              placeholder="Search..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="p-2 border border-gray-300 rounded-2xl bg-white text-black w-full sm:w-[200px]"
+            />
+            <Link to="/animals/add">
+              <p className="text-black font-bold text-2xl">Add Animal</p>
+            </Link>
+          </div>
         </div>
 
         {/* Animal Cards */}

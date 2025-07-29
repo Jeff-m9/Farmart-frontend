@@ -1,8 +1,34 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 function LandingPage() {
   const [visible, setVisible] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const { pathname } = useLocation();
+  const [dashboardPath, setDashboardPath] = useState("/dashboard");
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    const userData = localStorage.getItem("user");
+
+    if (token && userData) {
+      setIsLoggedIn(true);
+
+      try {
+        const user = JSON.parse(userData);
+        const role = user.role;
+
+        if (role === "farmer") {
+          setDashboardPath("/farmer-dashboard");
+        } else {
+          setDashboardPath("/dashboard");
+        }
+      } catch (err) {
+        console.error("Failed to parse user data:", err);
+      }
+    }
+  }, [pathname]);
+
   useEffect(() => {
     const timer = setTimeout(() => setVisible(true), 200);
     return () => clearTimeout(timer);
@@ -16,24 +42,32 @@ function LandingPage() {
           Farmart
         </div>
         <nav className="flex space-x-12 text-lg">
-          <Link
-            to="/about"
-            className="hover:underline hover:text-green-300 transition px-2 py-1"
-          >
-            About
-          </Link>
-          <Link
-            to="/login"
-            className="hover:underline hover:text-green-300 transition px-2 py-1"
-          >
-            LogIn
-          </Link>
-          <Link
-            to="/choose-role"
-            className="hover:underline hover:text-green-300 transition px-2 py-1"
-          >
-            SignUp
-          </Link>
+          {isLoggedIn ? (
+            <Link to={dashboardPath}>
+              <button>Dashboard</button>
+            </Link>
+          ) : (
+            <>
+              <Link
+                to="/about"
+                className="hover:underline hover:text-green-300 transition px-2 py-1"
+              >
+                About
+              </Link>
+              <Link
+                to="/login"
+                className="hover:underline hover:text-green-300 transition px-2 py-1"
+              >
+                LogIn
+              </Link>
+              <Link
+                to="/choose-role"
+                className="hover:underline hover:text-green-300 transition px-2 py-1"
+              >
+                SignUp
+              </Link>
+            </>
+          )}
         </nav>
       </header>
 

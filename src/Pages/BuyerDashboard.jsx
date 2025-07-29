@@ -1,14 +1,33 @@
-import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { ImageCarousel } from "./Image-carousel";
+import { useEffect, useState } from "react";
 
-function FarmerDashboard() {
+function BuyerDashboard() {
   const [animals, setAnimals] = useState([]);
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
+  const navigate = useNavigate();
 
+
+  const onSelectCategory = (category) => {
+    setSelectedCategory(category);
+  };
+
+  // Filtering logic
+  const filteredAnimals = animals.filter((animal) => {
+    const matchesCategory = selectedCategory
+      ? animal.category_id === selectedCategory.id
+      : true;
+
+    const matchesSearch = searchTerm
+      ? animal.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        animal.breed.toLowerCase().includes(searchTerm.toLowerCase())
+      : true;
+
+    return matchesCategory && matchesSearch;
+  });
 
   // Fetch animals
   useEffect(() => {
@@ -34,67 +53,8 @@ function FarmerDashboard() {
       .catch((err) => console.error("Failed to load categories", err));
   }, []);
 
-  // Filtering logic
-  const filteredAnimals = animals.filter((animal) => {
-    const matchesCategory = selectedCategory
-      ? animal.category_id === selectedCategory.id
-      : true;
-
-    const matchesSearch = searchTerm
-      ? animal.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        animal.breed.toLowerCase().includes(searchTerm.toLowerCase())
-      : true;
-
-    return matchesCategory && matchesSearch;
-  });
-
-  const onSelectCategory = (category) => {
-    setSelectedCategory(category);
-  };
-
-  if (loading) return <p className="text-center mt-8">Loading animals...</p>;
-
   return (
     <div className="min-h-screen bg-[#f1f8e9] font-sans flex flex-col">
-      {/* Header */}
-      <header className="bg-green-700/90 text-white flex justify-between items-center px-12 py-4 shadow-md sticky top-0 z-50 backdrop-blur-sm">
-        <div className="text-5xl font-extrabold tracking-wider py-2">
-          FarMart
-        </div>
-        <div className="flex items-center gap-4 mr-10">
-          <Link
-            to="/"
-            className="hover:underline hover:text-green-300 transition"
-          >
-            Home
-          </Link>
-          <input
-            type="text"
-            placeholder="Search..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            className="p-1 border border-gray-300 rounded-2xl bg-white text-black"
-          />
-          <Link to="/animals/add">
-            <p className="text-black font-bold">Add Animal</p>
-          </Link>
-          <Link to="/cart" aria-label="View shopping cart">
-            <img
-              src="/src/images/shopping_cart_24dp_1F1F1F_FILL1_wght400_GRAD200_opsz24.svg"
-              alt="Cart"
-              title="Cart"
-            />
-          </Link>
-          <Link to="/profile">
-            <img
-              src="/src/images/user_attributes_24dp_1F1F1F_FILL1_wght500_GRAD0_opsz48.svg"
-              alt="Profile"
-              title="Profile"
-              className="h-8"
-            />
-          </Link>
-        </div>
-      </header>
 
       <main className="flex-grow">
         {/* Carousel */}
@@ -102,29 +62,43 @@ function FarmerDashboard() {
           <ImageCarousel />
         </div>
 
-        {/* Categories */}
-        <div className=" flex space-x-6 mb-4 mt-4 justify-center">
-          {categories.map((category) => (
+        {/* Categories + Search */}
+        <div className="flex justify-between items-center mb-8 px-6 flex-wrap gap-4">
+          {/* Category Buttons */}
+          <div className="flex space-x-4 flex-wrap">
+            {categories.map((category) => (
+              <button
+                key={category.id}
+                onClick={() => onSelectCategory(category)}
+                className={`flex flex-col items-center space-y-1 p-3 rounded shadow transition ${
+                  selectedCategory?.id === category.id
+                    ? "bg-green-400 text-white"
+                    : "bg-green-100 text-green-700 hover:bg-green-200"
+                }`}
+                aria-pressed={selectedCategory?.id === category.id}
+              >
+                <div className="text-5xl">{category.icon}</div>
+                <div className="font-semibold">{category.name}</div>
+              </button>
+            ))}
             <button
-              key={category.id || category.name} // fallback if no id
-              onClick={() => onSelectCategory(category)}
-              className={`flex flex-col items-center space-y-1 p-3 rounded shadow transition ${
-                selectedCategory?.name === category.name
-                  ? "bg-green-400 text-white"
-                  : "bg-green-100 text-green-700 hover:bg-green-200"
-              }`}
-              aria-pressed={selectedCategory?.name === category.name}
+              onClick={() => onSelectCategory(null)}
+              className="px-4 py-2 rounded shadow bg-gray-300 hover:bg-gray-400 text-gray-800"
             >
-              <div className="text-5xl">{category.icon}</div>
-              <div className="font-semibold">{category.name}</div>
+              Clear Filter
             </button>
-          ))}
-          <button
-            onClick={() => onSelectCategory(null)}
-            className="px-4 py-2 rounded shadow bg-gray-300 hover:bg-gray-400 text-gray-800"
-          >
-            Clear Filter
-          </button>
+          </div>
+
+          {/* Search Input */}
+          <div className="w-full sm:w-auto">
+            <input
+              type="text"
+              placeholder="Search..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="p-2 border border-gray-300 rounded-2xl bg-white text-black w-full sm:w-[200px]"
+            />
+          </div>
         </div>
 
         {/* Animal Cards */}
@@ -175,7 +149,7 @@ function FarmerDashboard() {
       </main>
 
       {/* Footer */}
-      <footer className="bg-green-700 text-white py-6 text-center">
+      <footer className="bg-green-700 text-white py-6 mt-8 text-center">
         <div className="space-x-4">
           <Link to="/about" className="hover:underline">
             About Us
@@ -184,10 +158,9 @@ function FarmerDashboard() {
             Contact Us
           </Link>
         </div>
-        &copy; 2025 FarMart App. All rights reserved.
       </footer>
     </div>
   );
 }
 
-export default FarmerDashboard;
+export default BuyerDashboard;

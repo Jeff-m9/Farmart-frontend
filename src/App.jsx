@@ -1,5 +1,4 @@
 import { Routes, Route } from "react-router-dom";
-// import Navbar from "./components/navbar";y
 
 // Pages
 import LandingPage from "./Pages/LandingPage";
@@ -17,29 +16,124 @@ import BrowseAnimals from "./Pages/BrowseAnimals";
 import AddAnimalPage from "./Pages/AddAnimalPage";
 import EditAnimalPage from "./Pages/EditAnimalPage";
 import AnimalDetails from "./Pages/AnimalDetails";
+import Header from "./components/Header";
+
+// Layout wrapper
+function AppLayout({ children }) {
+  return (
+    <>
+      <Header />
+      {children}
+    </>
+  );
+}
 
 function App() {
   return (
-    <>
-      {/* <Navbar /> */}
-      <Routes>
-        <Route path="/" element={<LandingPage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/signup" element={<SignUpPage />} />
-        <Route path="/choose-role" element={<ChooseRolePage />} />
-        <Route path="/dashboard" element={<BuyerDashboard />} />
-        <Route path="/farmer-dashboard" element={<FarmerDashboard />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/edit-profile" element={<EditProfile />} />
-        <Route path="/cart" element={<CartPage />} />
-        <Route path="/payment" element={<PaymentPage />} />
-        <Route path="/animals/add" element={<AddAnimalPage />} />
-        <Route path="/animals/edit/:id" element={<EditAnimalPage />} />
-        <Route path="/about" element={<AboutUs />} />
-        <Route path="/browse" element={<BrowseAnimals />} />
-        <Route path="/animals/:id" element={<AnimalDetails />} />
-      </Routes>
-    </>
+    <Routes>
+      {/* Public Routes */}
+      <Route path="/" element={<LandingPage />} />
+      <Route path="/login" element={<LoginPage />} />
+      <Route path="/signup" element={<SignUpPage />} />
+
+      {/* Routes with header */}
+      <Route
+        path="/choose-role"
+        element={
+          <AppLayout>
+            <ChooseRolePage />
+          </AppLayout>
+        }
+      />
+      <Route
+        path="/dashboard"
+        element={
+          <AppLayout>
+            <BuyerDashboard />
+          </AppLayout>
+        }
+      />
+      <Route
+        path="/farmer-dashboard"
+        element={
+          <AppLayout>
+            <FarmerDashboard />
+          </AppLayout>
+        }
+      />
+      <Route
+        path="/profile"
+        element={
+          <AppLayout>
+            <Profile />
+          </AppLayout>
+        }
+      />
+      <Route
+        path="/edit-profile"
+        element={
+          <AppLayout>
+            <EditProfile />
+          </AppLayout>
+        }
+      />
+      <Route
+        path="/cart"
+        element={
+          <AppLayout>
+            <CartPage />
+          </AppLayout>
+        }
+      />
+      <Route
+        path="/payment"
+        element={
+          <AppLayout>
+            <PaymentPage />
+          </AppLayout>
+        }
+      />
+      <Route
+        path="/animals/add"
+        element={
+          <AppLayout>
+            <AddAnimalPage />
+          </AppLayout>
+        }
+      />
+      <Route
+        path="/animals/edit/:id"
+        element={
+          <AppLayout>
+            <EditAnimalPage />
+          </AppLayout>
+        }
+      />
+      <Route
+        path="/about"
+        element={
+          <AppLayout>
+            <AboutUs />
+          </AppLayout>
+        }
+      />
+      <Route
+        path="/browse"
+        element={
+          <AppLayout>
+            <BrowseAnimals />
+          </AppLayout>
+        }
+      />
+      <Route
+        path="/animals/:id"
+        element={
+          <AppLayout>
+            <AnimalDetails />
+          </AppLayout>
+        }
+      />
+    </Routes>
   );
 }
 

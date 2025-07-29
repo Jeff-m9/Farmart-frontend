@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
@@ -7,45 +7,26 @@ function AddAnimalPage() {
   const [form, setForm] = useState({
     name: "",
     breed: "",
-    age: 0,
+    age: null,
     description: "",
     image: "",
-    price: 0,
-    category_id: 0,
+    price: null,
+    category_id: null,
   });
 
-  const [categories, setCategories] = useState([]);
-
-  useEffect(() => {
-    const fetchCategories = async () => {
-      try {
-        const res = await fetch("http://localhost:5000/categories");
-        const data = await res.json();
-        setCategories(data);
-      } catch (error) {
-        console.error("Failed to fetch categories:", error);
-      }
-    };
-
-    fetchCategories();
-  }, []);
-
   const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    const newValue = ["age", "price", "category_id"].includes(name)
+      ? Number(value)
+      : value;
+
+    setForm({ ...form, [name]: newValue });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const token = localStorage.getItem("token");
-    const payload = {
-      name: form.name,
-      breed: form.breed,
-      age: (form.age),
-      description: form.description,
-      image: form.image,
-      price: (form.price),
-      category_id: (form.category_id),
-    };
+    const payload = { ...form };
 
     try {
       const res = await fetch("http://localhost:5000/animals", {
@@ -60,7 +41,7 @@ function AddAnimalPage() {
       const data = await res.json();
       if (res.ok) {
         toast.success("Animal added successfully!");
-        navigate("/dashboard");
+        navigate("/farmer-dashboard");
       } else {
         toast.error("Animal addition failed");
       }
@@ -68,6 +49,15 @@ function AddAnimalPage() {
       console.error("Error:", err);
       toast.error("Something went wrong. Please try again.");
     }
+  };
+
+  const fieldLabels = {
+    name: "Animal Name",
+    breed: "Breed",
+    age: "Age in years",
+    description: "Description",
+    image: "Image URL",
+    price: "Price (Ksh)",
   };
 
   return (
@@ -80,32 +70,49 @@ function AddAnimalPage() {
           Post New Animal
         </h2>
 
-        {["name", "breed", "age", "description", "image", "price"].map((field) => (
-          <input
-            key={field}
-            name={field}
-            placeholder={field.toUpperCase()}
-            value={form[field]}
-            onChange={handleChange}
-            required
-            className="block w-full mb-4 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-600"
-          />
+        {Object.keys(fieldLabels).map((field) => (
+          <div key={field} className="mb-4">
+            <label
+              htmlFor={field}
+              className="block mb-1 text-sm font-medium text-gray-700"
+            >
+              {fieldLabels[field]}
+            </label>
+            <input
+              id={field}
+              name={field}
+              type={field === "age" || field === "price" ? "number" : "text"}
+              placeholder={fieldLabels[field]}
+              value={form[field]}
+              onChange={handleChange}
+              required
+              className="block w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-600"
+            />
+          </div>
         ))}
 
-        <select
-          name="category"
-          value={form.category}
-          onChange={handleChange}
-          required
-          className="block w-full mb-4 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-600"
-        >
-          <option value="">Select Category</option>
-          {categories.map((cat) => (
-            <option key={cat.id} value={cat.name}>
-              {cat.name}
-            </option>
-          ))}
-        </select>
+        <div className="mb-6">
+          <label
+            htmlFor="category_id"
+            className="block mb-1 text-sm font-medium text-gray-700"
+          >
+            Category
+          </label>
+          <select
+            id="category_id"
+            name="category_id"
+            value={form.category_id}
+            onChange={handleChange}
+            required
+            className="block w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-600"
+          >
+            <option value="">Select Category</option>
+            <option value="1">Cow</option>
+            <option value="2">Sheep</option>
+            <option value="3">Goat</option>
+            <option value="4">Horse</option>
+          </select>
+        </div>
 
         <button
           type="submit"
