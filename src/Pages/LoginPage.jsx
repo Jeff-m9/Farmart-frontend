@@ -28,7 +28,7 @@ function LoginPage() {
 
       if (res.ok) {
         toast.success("Logged in successfully!");
-        await login(data.user, data.token); // ✅ Use the correct login function
+        await login(data.user, data.access_token); // ✅ Use the correct login function
         if (data.user.role === "farmer") {
           navigate("/farmer-dashboard")
         } else (

@@ -24,7 +24,7 @@ function SignUpPage() {
     }
 
     if (password !== confirmPassword) {
-      alert("Passwords do not match!");
+      toast.error("Passwords do not match!");
       return;
     }
     const formData = {
