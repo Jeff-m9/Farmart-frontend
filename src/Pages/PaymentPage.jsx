@@ -1,9 +1,11 @@
 import { useState, useRef } from "react";
 import { toast } from "react-toastify";
+import { useCart } from "./CartContext";
 
 const BASE_URL = "http://127.0.0.1:5000";
 
 function PaymentPage() {
+  const { total } = useCart();
   const [phone, setPhone] = useState("");
   const toastId = useRef(null);
   const intervalId = useRef(null);
@@ -117,9 +119,13 @@ function PaymentPage() {
       }}
     >
       <h1 style={{ color: "#2c7a7b", marginBottom: 10 }}>Payment</h1>
+      <p className="font-bold text-[#2c7a7b] mb-4">
+        Total Amount: Ksh {total.toLocaleString()}
+      </p>
       <p style={{ color: "#555", marginBottom: 20 }}>
         Enter your phone number to pay via M-PESA.
       </p>
+
       <input
         type="text"
         placeholder="254712345678"

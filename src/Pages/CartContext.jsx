@@ -80,6 +80,11 @@ export const CartProvider = ({ children }) => {
       console.error("Backend fetch error", err);
     }
   };
+  // Calculate Total
+  const total = cart.reduce(
+    (sum, item) => sum + item.price * (item.quantity || 1),
+    0
+  );
 
   return (
     <CartContext.Provider
@@ -92,6 +97,7 @@ export const CartProvider = ({ children }) => {
         getQuantity,
         syncCartWithBackend,
         fetchBackendCart,
+        total,
       }}
     >
       {children}
