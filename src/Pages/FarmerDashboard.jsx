@@ -21,7 +21,8 @@ function FarmerDashboard() {
 
     try {
       const user = jwtDecode(token);
-      if (user.role !== "farmer") {
+
+      if (!user?.role || user.role !== "farmer") {
         navigate("/dashboard");
       }
     } catch (err) {
