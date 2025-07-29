@@ -34,7 +34,7 @@ function Profile() {
               {user.first_name} {user.last_name}
             </h2>
             <p className="text-sm text-gray-700">{user.email}</p>
-            <p className="text-sm text-gray-700">+254 {user.phone_number}</p>
+            <p className="text-sm text-gray-700">+{user.phone_number}</p>
             <span className="inline-block mt-2 px-2 py-1 text-xs text-white bg-green-600 rounded">
               Role: {user.role}
             </span>

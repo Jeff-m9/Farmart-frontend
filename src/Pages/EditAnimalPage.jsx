@@ -72,7 +72,7 @@ function EditAnimalPage() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="max-w-xl mx-auto p-6 bg-white rounded shadow mt-8"
+      className="max-w-xl mx-auto p-6 bg-[#eaf5d5] rounded shadow mt-8"
     >
       <h2 className="text-2xl font-bold mb-6 text-center">Edit Animal</h2>
 
@@ -118,7 +118,7 @@ function EditAnimalPage() {
         </button>
         <button
           type="button"
-          onClick={() => navigate("/browse")}
+          onClick={() => navigate("/farmer-dashboard")}
           className="bg-gray-400 text-white px-4 py-2 rounded hover:bg-gray-500"
         >
           Cancel

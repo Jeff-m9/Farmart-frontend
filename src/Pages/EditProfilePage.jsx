@@ -78,7 +78,7 @@ function EditProfile() {
 
   return (
     <div className="min-h-screen bg-[#f1f8e9] flex items-center justify-center px-4">
-      <div className="bg-white p-6 rounded-xl shadow-md w-full max-w-md">
+      <div className="bg-[#eaf5d5] p-6 rounded-xl shadow-md w-full max-w-md">
         <h2 className="text-xl font-semibold text-green-700 mb-4">
           Edit Profile
         </h2>

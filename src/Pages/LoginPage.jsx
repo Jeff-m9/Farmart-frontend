@@ -24,16 +24,13 @@ function LoginPage() {
       });
 
       const data = await res.json();
-      console.log(data);
 
       if (res.ok) {
         toast.success("Logged in successfully!");
         await login(data.user, data.access_token); // ✅ Use the correct login function
         if (data.user.role === "farmer") {
-          navigate("/farmer-dashboard")
-        } else (
-          navigate("/dashboard")
-        ) // ✅ Redirect only after context is updated
+          navigate("/farmer-dashboard");
+        } else navigate("/dashboard"); // ✅ Redirect only after context is updated
       } else {
         setError(data.errors || { message: data.message });
         toast.error(data.message || "Login failed");
@@ -55,7 +52,10 @@ function LoginPage() {
         </h2>
         <p className="text-center text-sm text-gray-500 mb-6">
           Don’t have an account?{" "}
-          <a className="text-green-700 hover:underline font-medium" href="/signup">
+          <a
+            className="text-green-700 hover:underline font-medium"
+            href="/signup"
+          >
             Sign Up
           </a>
         </p>
