@@ -18,6 +18,7 @@ import EditAnimalPage from "./Pages/EditAnimalPage";
 import AnimalDetails from "./Pages/AnimalDetails";
 import Header from "./components/Header";
 import { AdminsPage } from "./Pages/adminspage";
+import { ContactUs } from "./Pages/contactUs";
 
 // Layout wrapper
 function AppLayout({ children }) {
@@ -135,6 +136,7 @@ function App() {
           </AppLayout>
         }
       />
+      <Route path="/contact" element={<ContactUs />} />
     </Routes>
   );
 }
