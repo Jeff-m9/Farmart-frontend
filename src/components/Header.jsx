@@ -9,7 +9,7 @@ function Header() {
       <div className="flex items-center gap-4 mr-10">
         {user?.role === "admin" && (
           <Link
-            to="/admin-dashboard"
+            to="/adminspage"
             className="hover:underline hover:text-green-300 transition"
           >
             Dashboard

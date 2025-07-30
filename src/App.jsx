@@ -16,13 +16,15 @@ import BrowseAnimals from "./Pages/BrowseAnimals";
 import AddAnimalPage from "./Pages/AddAnimalPage";
 import EditAnimalPage from "./Pages/EditAnimalPage";
 import AnimalDetails from "./Pages/AnimalDetails";
-
+import Header from "./components/Header";
+import { AdminsPage } from "./Pages/adminspage";
 
 // Layout wrapper
 function AppLayout({ children }) {
   return (
     <>
-
+      <Header />
+      <main>{children}</main>
     </>
   );
 }
@@ -36,6 +38,7 @@ function App() {
       <Route path="/signup" element={<SignUpPage />} />
 
       {/* Routes with header */}
+      <Route path="/adminspage" element={<AdminsPage />} />
       <Route
         path="/choose-role"
         element={
