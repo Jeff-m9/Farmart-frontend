@@ -24,7 +24,7 @@ export function ImageCarousel() {
           key={i}
           src={image}
           alt={`Slide ${i}`}
-          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out ${
+          className={`absolute inset-0 w-full h-full object-cover transition-opacity brightness-50 duration-1000 ease-in-out ${
             index === i ? "opacity-100 z-10" : "opacity-0 z-0"
           }`}
         />

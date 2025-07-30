@@ -56,7 +56,7 @@ function PaymentPage() {
       return;
     }
     // retrieving access token from local storage
-    const accessToken = localStorage.getItem("session");
+    const accessToken = localStorage.getItem("token");
     // toast
     toastId.current = toast.loading("Initiating STK push...");
     // Post request to server
@@ -106,47 +106,50 @@ function PaymentPage() {
   };
 
   return (
-    <div
-      style={{
-        maxWidth: 400,
-        margin: "50px auto",
-        padding: 20,
-        border: "1px solid #ccc",
-        borderRadius: 8,
-        boxShadow: "0 2px 5px rgba(0,0,0,0.1)",
-        fontFamily: "Arial, sans-serif",
-        textAlign: "center",
-      }}
-    >
-      <h1 style={{ color: "#2c7a7b", marginBottom: 10 }}>Payment</h1>
-      <p className="font-bold text-[#2c7a7b] mb-4">
-        Total Amount: Ksh {total.toLocaleString()}
-      </p>
-      <p style={{ color: "#555", marginBottom: 20 }}>
-        Enter your phone number to pay via M-PESA.
-      </p>
-
-      <input
-        type="text"
-        placeholder="254712345678"
-        value={phone}
-        onChange={(e) => setPhone(e.target.value)}
-        className="w-full p-2 mb-5 border border-gray-300 rounded"
-      />
-      <button
-        onClick={() => handleInitiatePayment()}
+    <div className="min-h-screen bg-[#f1f8e9] font-sans flex flex-col">
+      <div
         style={{
-          backgroundColor: "#2c7a7b",
-          color: "white",
-          border: "none",
-          padding: "10px 20px",
-          borderRadius: 4,
-          cursor: "pointer",
-          fontSize: 16,
+          maxWidth: 400,
+          margin: "50px auto",
+          padding: 20,
+          border: "1px solid #ccc",
+          background: "white",
+          borderRadius: 8,
+          boxShadow: "0 2px 5px rgba(0,0,0,0.1)",
+          fontFamily: "Arial, sans-serif",
+          textAlign: "center",
         }}
       >
-        Pay Now
-      </button>
+        <h1 style={{ color: "#65bb46", marginBottom: 10 }}>Payment</h1>
+        <p className="font-bold text-[#65bb46] mb-4">
+          Total Amount: Ksh {total.toLocaleString()}
+        </p>
+        <p style={{ color: "#555", marginBottom: 20 }}>
+          Enter your phone number to pay via M-PESA.
+        </p>
+
+        <input
+          type="text"
+          placeholder="254712345678"
+          value={phone}
+          onChange={(e) => setPhone(e.target.value)}
+          className="w-full p-2 mb-5 border border-gray-300 rounded"
+        />
+        <button
+          onClick={() => handleInitiatePayment()}
+          style={{
+            backgroundColor: "#65bb46",
+            color: "white",
+            border: "none",
+            padding: "10px 20px",
+            borderRadius: 4,
+            cursor: "pointer",
+            fontSize: 16,
+          }}
+        >
+          Pay Now
+        </button>
+      </div>
     </div>
   );
 }

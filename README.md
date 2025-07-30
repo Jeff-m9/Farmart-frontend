@@ -1,4 +1,4 @@
-                    # Farmart
+ # Farmart
 
 **Farmart** is a modern e-commerce platform that empowers farmers to sell livestock directly to buyers — eliminating costly middlemen and restoring transparency to agricultural trade.
 

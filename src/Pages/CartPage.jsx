@@ -7,16 +7,9 @@ function CartPage() {
     cart,
     removeFromCart,
     clearCart,
-    syncCartWithBackend,
-    fetchBackendCart,
   } = useCart();
 
   const [total, setTotal] = useState(0);
-
-  useEffect(() => {
-    // Attempts to fetch and sync backend cart when page loads
-    fetchBackendCart();
-  }, []);
 
   useEffect(() => {
     const totalAmount = cart.reduce(
@@ -81,12 +74,6 @@ function CartPage() {
           className="bg-red-600 text-white px-6 py-2 rounded shadow hover:bg-red-700"
         >
           Clear Cart
-        </button>
-        <button
-          onClick={syncCartWithBackend}
-          className="bg-yellow-500 text-white px-6 py-2 rounded shadow hover:bg-yellow-600"
-        >
-          Save Progress
         </button>
         <Link
           to="/payment"

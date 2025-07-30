@@ -3,27 +3,9 @@ import { createContext, useContext, useState, useEffect } from "react";
 // Create the context
 const CartContext = createContext();
 
-// Helper: Get cart from localStorage
-const getLocalCart = () => {
-  try {
-    return JSON.parse(localStorage.getItem("cart")) || [];
-  } catch {
-    return [];
-  }
-};
-
-// Helper: Save cart to localStorage
-const saveLocalCart = (cart) => {
-  localStorage.setItem("cart", JSON.stringify(cart));
-};
 
 export const CartProvider = ({ children }) => {
-  const [cart, setCart] = useState(getLocalCart());
-
-  // Save to localStorage on any cart change
-  useEffect(() => {
-    saveLocalCart(cart);
-  }, [cart]);
+  const [cart, setCart] = useState([]);
 
   // Add or increase quantity
   const addToCart = (animal) => {
@@ -54,32 +36,6 @@ export const CartProvider = ({ children }) => {
     return item?.quantity || 0;
   };
 
-  // Sync with backend
-  const syncCartWithBackend = async () => {
-    try {
-      await fetch("http://localhost:5000/cart", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(cart),
-      });
-      alert("✅ Cart synced to backend!");
-    } catch (err) {
-      console.error("Sync failed", err);
-      alert("❌ Sync failed.");
-    }
-  };
-
-  // Load cart from backend (overwrites local)
-  const fetchBackendCart = async () => {
-    try {
-      const res = await fetch("http://localhost:5000/cart");
-      if (!res.ok) throw new Error("Backend fetch failed");
-      const data = await res.json();
-      setCart(data);
-    } catch (err) {
-      console.error("Backend fetch error", err);
-    }
-  };
   // Calculate Total
   const total = cart.reduce(
     (sum, item) => sum + item.price * (item.quantity || 1),
@@ -95,8 +51,6 @@ export const CartProvider = ({ children }) => {
         clearCart,
         isInCart,
         getQuantity,
-        syncCartWithBackend,
-        fetchBackendCart,
         total,
       }}
     >

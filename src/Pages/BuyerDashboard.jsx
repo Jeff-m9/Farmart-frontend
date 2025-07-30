@@ -57,7 +57,7 @@ function BuyerDashboard() {
     <div className="min-h-screen bg-[#f1f8e9] font-sans flex flex-col">
       <main className="flex-grow">
         {/* Carousel */}
-        <div className="h-28 bg-[#f1f8e9] font-sans flex flex-col">
+        <div className="bg-[#f1f8e9] font-sans flex flex-col">
           <ImageCarousel />
         </div>
 
@@ -94,7 +94,9 @@ function BuyerDashboard() {
 
         {/* Animal Cards */}
         <div className="p-6">
-          <h1 className="text-2xl text-center font-bold mb-3">Available animals</h1>
+          <h1 className="text-3xl text-center font-bold pb-2">
+            Available animals
+          </h1>
           {loading ? (
             <p className="text-center text-lg text-gray-600">
               Loading animals...
@@ -103,14 +105,14 @@ function BuyerDashboard() {
             <>
               {filteredAnimals.length === 0 ? (
                 <p className="text-center text-gray-600">
-                  No animals found in this category.
+                  No animals available
                 </p>
               ) : (
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+                <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 justify-items-center">
                   {filteredAnimals.map((animal) => (
                     <div
                       key={animal.id}
-                      className="p-4 rounded-lg shadow-md text-gray-800 hover:shadow-lg transition-transform transform hover:scale-105 w-96"
+                      className="p-4 rounded-lg shadow-md text-gray-800 hover:shadow-lg transition-transform transform hover:scale-105 w-100"
                       style={{
                         background:
                           "linear-gradient(to bottom, #D9E2D1 60%, #91FD80 93%, #91FD80 100%)",
@@ -150,6 +152,7 @@ function BuyerDashboard() {
             Contact Us
           </Link>
         </div>
+        &copy; 2025 FarMart App. All rights reserved.
       </footer>
     </div>
   );

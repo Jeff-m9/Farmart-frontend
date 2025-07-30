@@ -37,17 +37,12 @@ function App() {
       <Route path="/" element={<LandingPage />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/signup" element={<SignUpPage />} />
+      <Route path="/choose-role" element={<ChooseRolePage />} />
+      <Route path="/browse" element={<BrowseAnimals />} />
 
       {/* Routes with header */}
       <Route path="/adminspage" element={<AdminsPage />} />
-      <Route
-        path="/choose-role"
-        element={
-          <AppLayout>
-            <ChooseRolePage />
-          </AppLayout>
-        }
-      />
+
       <Route
         path="/dashboard"
         element={
@@ -117,14 +112,6 @@ function App() {
         element={
           <AppLayout>
             <AboutUs />
-          </AppLayout>
-        }
-      />
-      <Route
-        path="/browse"
-        element={
-          <AppLayout>
-            <BrowseAnimals />
           </AppLayout>
         }
       />
