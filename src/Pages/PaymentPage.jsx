@@ -68,7 +68,7 @@ function PaymentPage() {
           "Content-Type": "application/json",
           Accept: "application/json",
         },
-        body: JSON.stringify({ phone }),
+        body: JSON.stringify({ phone, amount: total }),
       });
       // converting response to json
       const data = await res.json();
