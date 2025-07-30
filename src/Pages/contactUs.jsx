@@ -95,7 +95,7 @@ export const ContactUs = () => {
               </span>
               <br />
               <span>
-                Edna
+                Edna:{" "}
                 <a
                   href="mailto:edna.wayua@student.moringaschool.com"
                   className="underline hover:text-green-800"
@@ -105,7 +105,7 @@ export const ContactUs = () => {
               </span>
               <br />
               <span>
-                Edian
+                Edian:{" "}
                 <a
                   href="mailto:edian.nyambura@student.moringaschool.com"
                   className="underline hover:text-green-800"
@@ -118,7 +118,7 @@ export const ContactUs = () => {
                 <p className="text-green-900 text-lg leading-relaxed font-medium">
                   We truly appreciate you choosing our platform. Your support
                   means the world to us. We’re here to ensure you enjoy a
-                  seamless and satisfying shopping experienc
+                  seamless and satisfying shopping experience
                 </p>
               </div>
             </p>
