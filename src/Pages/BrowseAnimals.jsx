@@ -1,46 +1,8 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useCart } from "./CartContext";
+import { toast } from "react-toastify";
 
-const fallbackAnimals = [
-  {
-    id: 1,
-    name: "Golden Retriever",
-    breed: "Dog",
-    age: "3 years",
-    description: "Friendly and intelligent dog breed.",
-    image:
-      "https://images.unsplash.com/photo-1558788353-f76d92427f16?auto=format&fit=crop&w=600&q=60",
-    price: 18000,
-  },
-  {
-    id: 2,
-    name: "Holstein Cow",
-    breed: "Cow",
-    age: "2 years",
-    description: "High milk-producing dairy cow.",
-    image: "https://live.staticflickr.com/3857/15347464861_334a12c221_b.jpg",
-    price: 25000,
-  },
-  {
-    id: 3,
-    name: "Suffolk Sheep",
-    breed: "Sheep",
-    age: "1 year",
-    description: "Popular meat sheep breed.",
-    image: "https://www.livestockkenya.com/images/hampshire-down.jpg",
-    price: 2400,
-  },
-  {
-    id: 4,
-    name: "Dorper Sheep",
-    breed: "Sheep",
-    age: "2 years",
-    description: "Hardy breed with good meat quality.",
-    image: "https://farminginkenya.co.ke/wp-content/uploads/2024/10/BRAVO.webp",
-    price: 3500,
-  },
-];
 
 function BrowseAnimals() {
   const [animals, setAnimals] = useState([]);
@@ -48,32 +10,24 @@ function BrowseAnimals() {
   const { cart, addToCart, removeFromCart } = useCart();
   const location = useLocation();
 
-  // 🟨 Extract search query from URL
   useEffect(() => {
     const params = new URLSearchParams(location.search);
     const searchParam = params.get("name") || "";
-    console.log("🔍 Search param from URL:", searchParam);
     setFilter(searchParam);
   }, [location.search]);
 
-  // 🟦 Fetch animals and merge with fallback
   useEffect(() => {
-    fetch("http://localhost:5000/animals")
+    fetch("http://127.0.0.1:5000/animals")
       .then((res) => {
-        if (!res.ok) throw new Error("Backend fetch failed");
+        if (!res.ok) toast.error("Backend fetch failed");
         return res.json();
       })
       .then((data) => {
-        const combined = [...data, ...fallbackAnimals];
-        const uniqueAnimals = Array.from(
-          new Map(combined.map((a) => [a.id, a])).values()
-        );
-        setAnimals(uniqueAnimals);
-        console.log("✅ Animals fetched and combined:", uniqueAnimals);
+        setAnimals(data);
+        console.log("✅ Animals fetched:", data);
       })
-      .catch(() => {
-        setAnimals(fallbackAnimals);
-        console.warn("⚠️ Using fallback animals due to fetch failure");
+      .catch((err) => {
+        setAnimals();
       });
   }, []);
 
@@ -92,7 +46,6 @@ function BrowseAnimals() {
     <div className="max-w-6xl mx-auto mt-12 p-6 relative">
       <h1 className="text-3xl font-bold mb-6 text-center">Browse Animals</h1>
 
-      {/* 🧪 Live input for testing, updates filter manually */}
       <input
         type="text"
         placeholder="Search by name, breed, or description"
@@ -136,17 +89,17 @@ function BrowseAnimals() {
                     Add to Cart
                   </button>
                   {getQuantity(animal.id) > 0 && (
-                    <span className="text-gray-600 text-sm">
-                      In Cart: {getQuantity(animal.id)}
-                    </span>
-                  )}
-                  {getQuantity(animal.id) > 0 && (
-                    <button
-                      onClick={() => removeFromCart(animal.id)}
-                      className="text-red-600 text-sm underline"
-                    >
-                      Remove All
-                    </button>
+                    <>
+                      <span className="text-gray-600 text-sm">
+                        In Cart: {getQuantity(animal.id)}
+                      </span>
+                      <button
+                        onClick={() => removeFromCart(animal.id)}
+                        className="text-red-600 text-sm underline"
+                      >
+                        Remove All
+                      </button>
+                    </>
                   )}
                 </div>
               </div>
@@ -155,7 +108,6 @@ function BrowseAnimals() {
         )}
       </ul>
 
-      {/* 🛒 Floating Cart Button */}
       {cart.length > 0 && (
         <Link
           to="/cart"
