@@ -55,9 +55,9 @@ function SignUpPage() {
         autoClose: 3000,
       });
       if (data.user.role === "farmer") {
-        navigate("/farmer-dashboard")
+        navigate("/farmer-dashboard");
       } else {
-        navigate("/dashboard")
+        navigate("/dashboard");
       }
     } catch (err) {
       toast.error("Signup error: " + err.message);
@@ -70,14 +70,16 @@ function SignUpPage() {
       <div
         className="w-1/2 h-full bg-cover bg-center"
         style={{
-          backgroundImage: `url("https://cff2.earth.com/uploads/2023/05/16064103/Farms-scaled.jpg")`,
+          backgroundImage: `url("https://images.unsplash.com/photo-1546445317-29f4545e9d53?q=80&w=702&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")`,
         }}
       >
         <div className="h-full flex items-center justify-center">
-          <h1 className="text-black text-4xl font-bold">Welcome To FarmArt</h1>
+          <h1 className="text-green-400 text-4xl font-bold">
+            Welcome To FarmArt
+          </h1>
         </div>
       </div>
-      <div className="w-1/2 h-full flex items-center justify-center px-8 ">
+      <div className=" bg-[#f1f8e9] w-1/2 h-full flex items-center justify-center px-8 ">
         <div>
           <img
             src="https://previews.123rf.com/images/houbacze/houbacze1709/houbacze170900677/86486775-vector-illustration-background-sign-up-now.jpg"
