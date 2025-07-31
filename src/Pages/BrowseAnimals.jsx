@@ -3,6 +3,8 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useCart } from "./CartContext";
 import { toast } from "react-toastify";
 import { BASE_URL } from "../utils";
+import Navbar from "../components/navbar";
+
 
 function BrowseAnimals() {
   const [animals, setAnimals] = useState([]);
@@ -47,6 +49,7 @@ function BrowseAnimals() {
   return (
     <>
       {/* Header */}
+      
       <header className="bg-green-700/90 text-white flex justify-between items-center px-12 py-6 shadow-md sticky top-0 z-50 backdrop-blur-sm">
         <div className="text-4xl font-extrabold tracking-wider py-2">
           Farmart

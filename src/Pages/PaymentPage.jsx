@@ -1,13 +1,22 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { toast } from "react-toastify";
 import { useCart } from "./CartContext";
 import { BASE_URL } from "../utils";
+import { Phone } from "lucide-react";
+import { set } from "zod";
 
 function PaymentPage() {
   const { total } = useCart();
   const [phone, setPhone] = useState("");
   const toastId = useRef(null);
   const intervalId = useRef(null);
+
+
+
+
+  
+
+  
   // Method to check Payment response
   const checkPayment = (checkoutRequestId) => {
     fetch(`${BASE_URL}/payments/check/${checkoutRequestId}`, {
@@ -19,7 +28,7 @@ function PaymentPage() {
     })
       .then((res) => res.json())
       .then((data) => {
-        clearInterval(intervalId);
+        clearInterval(intervalId.current);
 
         if (data.data.ResultCode == "0") {
           toast.update(toastId.current, {
@@ -54,7 +63,16 @@ function PaymentPage() {
       toast("Kindly enter your phone number.");
       return;
     }
+   let formattedPhone = phone
+if (phone.startsWith("0")){
+  formattedPhone = `254${phone.slice(1)}`
+  
+}
+  console.log("Formatted phone number:", formattedPhone);
+
+
     // retrieving access token from local storage
+   
     const accessToken = localStorage.getItem("token");
     // toast
     toastId.current = toast.loading("Initiating STK push...");
@@ -67,7 +85,7 @@ function PaymentPage() {
           "Content-Type": "application/json",
           Accept: "application/json",
         },
-        body: JSON.stringify({ phone, amount: total }),
+        body: JSON.stringify({ formattedPhone, amount: total }),
       });
       // converting response to json
       const data = await res.json();
@@ -104,6 +122,8 @@ function PaymentPage() {
     }
   };
 
+  
+
   return (
     <div className="min-h-screen bg-[#f1f8e9] font-sans flex flex-col">
       <div
@@ -129,9 +149,9 @@ function PaymentPage() {
 
         <input
           type="text"
-          placeholder="254712345678"
+          placeholder="0712345678"
           value={phone}
-          onChange={(e) => setPhone(e.target.value)}
+          onChange={(e)=> setPhone(e.target.value)}
           className="w-full p-2 mb-5 border border-gray-300 rounded"
         />
         <button
