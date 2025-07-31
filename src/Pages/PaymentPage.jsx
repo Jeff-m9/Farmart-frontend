@@ -68,9 +68,16 @@ if (phone.startsWith("0")){
   formattedPhone = `254${phone.slice(1)}`
   
 }
-  console.log("Formatted phone number:", formattedPhone);
+else if (phone.startsWith("+254")) {
+  formattedPhone = phone.slice(1);
+} else if (phone.startsWith("254")) {
+  formattedPhone = phone
+}  else {
+  toast("Please enter a valid phone number (starting with 07, 254, or +254).");
+  return;
+}
 
-
+console.log("Formatted Phone:", formattedPhone);
     // retrieving access token from local storage
    
     const accessToken = localStorage.getItem("token");
@@ -85,7 +92,7 @@ if (phone.startsWith("0")){
           "Content-Type": "application/json",
           Accept: "application/json",
         },
-        body: JSON.stringify({ formattedPhone, amount: total }),
+        body: JSON.stringify({ phone:formattedPhone, amount: total }),
       });
       // converting response to json
       const data = await res.json();
