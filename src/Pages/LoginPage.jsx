@@ -33,7 +33,7 @@ function LoginPage() {
           navigate("/farmer-dashboard");
         } else navigate("/dashboard"); // ✅ Redirect only after context is updated
       } else {
-        setError(data.errors || { message: data.message });
+        setError({ message: data.message || "Login failed" });
         toast.error(data.message || "Login failed");
       }
     } catch (err) {
@@ -62,6 +62,11 @@ function LoginPage() {
         </p>
 
         <form onSubmit={handleSubmit} className="space-y-4">
+          {error && (
+            <div className="text-red-600 text-sm text-center mb-2">
+              {error.message}
+            </div>
+          )}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
               Email

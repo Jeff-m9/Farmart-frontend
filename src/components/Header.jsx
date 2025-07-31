@@ -35,6 +35,17 @@ function Header() {
           </Link>
         )}
 
+
+{user?.role === "user" && (
+          <Link
+            to="/browse"
+            className="hover:underline hover:text-green-300 transition"
+          >
+            Browse Animals
+          </Link>
+        )}
+
+
         <Link to="/cart" aria-label="View shopping cart">
           Cart
         </Link>

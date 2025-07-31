@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { jwtDecode } from "jwt-decode";
 import { ImageCarousel } from "./Image-carousel";
 import { BASE_URL } from "../utils";
+import Navbar from '../components/navbar'
 
 function FarmerDashboard() {
   const [animals, setAnimals] = useState([]);
