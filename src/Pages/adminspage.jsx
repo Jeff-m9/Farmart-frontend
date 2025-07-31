@@ -138,20 +138,9 @@ export const AdminsPage = () => {
               <p className="text-black font-bold">Add Animal</p>
             </Link>
             <Link to="/cart" aria-label="View shopping cart">
-              <img
-                src="/src/images/shopping_cart_24dp_1F1F1F_FILL1_wght400_GRAD200_opsz24.svg"
-                alt="Cart"
-                title="Cart"
-              />
+              Cart
             </Link>
-            <Link to="/profile">
-              <img
-                src="/src/images/user_attributes_24dp_1F1F1F_FILL1_wght500_GRAD0_opsz48.svg"
-                alt="Profile"
-                title="Profile"
-                className="h-8"
-              />
-            </Link>
+            <Link to="/profile">Profile</Link>
           </div>
         </header>
       </div>
