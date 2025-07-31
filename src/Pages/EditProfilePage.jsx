@@ -4,6 +4,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { BASE_URL } from "../utils";
 
 const profileSchema = z.object({
   first_name: z.string().min(1, "First name is required"),
@@ -51,7 +52,7 @@ function EditProfile() {
   const onSubmit = async (data) => {
     const token = localStorage.getItem("token");
     try {
-      const res = await fetch(`http://127.0.0.1:5000/users/${user.id}`, {
+      const res = await fetch(`${BASE_URL}/users/${user.id}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",

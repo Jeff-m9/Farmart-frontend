@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { jwtDecode } from "jwt-decode";
 import { toast } from "react-toastify";
+import { BASE_URL } from "../utils";
 
 export const AdminsPage = () => {
   const [categories, setCategories] = useState([]);
@@ -16,7 +17,7 @@ export const AdminsPage = () => {
   // Fetching All Users
   const fetchUsers = async () => {
     try {
-      const res = await fetch("http://127.0.0.1:5000/users", {
+      const res = await fetch(`${BASE_URL}/users`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -47,7 +48,7 @@ export const AdminsPage = () => {
     }
 
     try {
-      const res = await fetch(`http://127.0.0.1:5000/users/${id}`, {
+      const res = await fetch(`${BASE_URL}/users/${id}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -72,7 +73,7 @@ export const AdminsPage = () => {
   // Categories
   const fetchCategories = async () => {
     try {
-      const res = await fetch("http://localhost:5000/categories");
+      const res = await fetch(`${BASE_URL}/categories`);
       const data = await res.json();
       setCategories(data);
     } catch (err) {
@@ -86,7 +87,7 @@ export const AdminsPage = () => {
   const handleAddCategory = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch("http://localhost:5000/categories", {
+      const res = await fetch(`${BASE_URL}/categories`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

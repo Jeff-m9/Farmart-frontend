@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { BASE_URL } from "../utils";
 
 function EditAnimalPage() {
   const { id } = useParams();
@@ -11,7 +12,7 @@ function EditAnimalPage() {
   useEffect(() => {
     const fetchAnimal = async () => {
       try {
-        const res = await fetch(`http://localhost:5000/animals/${id}`);
+        const res = await fetch(`${BASE_URL}/animals/${id}`);
         const data = await res.json();
         if (res.ok) {
           setForm(data);
@@ -44,7 +45,7 @@ function EditAnimalPage() {
     const token = localStorage.getItem("token");
 
     try {
-      const res = await fetch(`http://localhost:5000/animals/${id}`, {
+      const res = await fetch(`${BASE_URL}/animals/${id}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",

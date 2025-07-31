@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import useAuth from "../context/useAuth";
+import { BASE_URL } from "../utils";
 
 function LoginPage() {
   const [email, setEmail] = useState("");
@@ -15,7 +16,7 @@ function LoginPage() {
     e.preventDefault();
 
     try {
-      const res = await fetch("http://127.0.0.1:5000/login", {
+      const res = await fetch(`${BASE_URL}/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

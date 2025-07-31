@@ -1,3 +1,5 @@
+import { BASE_URL } from "../utils";
+
 //This code syncs local cart to backend-
 export const syncLocalCartToBackend = async () => {
   const token = localStorage.getItem("access_token");
@@ -5,7 +7,7 @@ export const syncLocalCartToBackend = async () => {
 
   for (const item of localCart) {
     try {
-      await fetch("http://localhost:5000/cart", {
+      await fetch(`${BASE_URL}/cart`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

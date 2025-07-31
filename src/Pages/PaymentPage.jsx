@@ -1,8 +1,7 @@
 import { useState, useRef } from "react";
 import { toast } from "react-toastify";
 import { useCart } from "./CartContext";
-
-const BASE_URL = "http://127.0.0.1:5000";
+import { BASE_URL } from "../utils";
 
 function PaymentPage() {
   const { total } = useCart();

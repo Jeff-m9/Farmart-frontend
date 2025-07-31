@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { BASE_URL } from "../utils";
 
 function SignUpPage() {
   const [firstName, setFirstName] = useState("");
@@ -36,7 +37,7 @@ function SignUpPage() {
       role: role,
     };
     try {
-      const res = await fetch("http://127.0.0.1:5000/signup", {
+      const res = await fetch(`${BASE_URL}/signup`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

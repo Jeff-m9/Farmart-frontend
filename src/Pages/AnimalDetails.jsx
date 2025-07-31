@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useCart } from "./CartContext";
 import { jwtDecode } from "jwt-decode";
+import { BASE_URL } from "../utils";
 
 function AnimalDetails() {
   const { id } = useParams();
@@ -14,7 +15,7 @@ function AnimalDetails() {
   const { addToCart, removeFromCart, isInCart } = useCart();
 
   useEffect(() => {
-    fetch(`http://localhost:5000/animals/${id}`)
+    fetch(`${BASE_URL}/animals/${id}`)
       .then((res) => {
         if (!res.ok) throw new Error("Failed to fetch animal");
         return res.json();

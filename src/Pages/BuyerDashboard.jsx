@@ -1,6 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { ImageCarousel } from "./Image-carousel";
 import { useEffect, useState } from "react";
+import { BASE_URL } from "../utils";
 
 function BuyerDashboard() {
   const [animals, setAnimals] = useState([]);
@@ -31,7 +32,7 @@ function BuyerDashboard() {
 
   // Fetch animals
   useEffect(() => {
-    fetch("http://localhost:5000/animals")
+    fetch(`${BASE_URL}/animals`)
       .then((res) => res.json())
       .then((data) => {
         setAnimals(data);
@@ -45,7 +46,7 @@ function BuyerDashboard() {
 
   // Fetch categories
   useEffect(() => {
-    fetch("http://localhost:5000/categories")
+    fetch(`${BASE_URL}/categories`)
       .then((res) => res.json())
       .then((data) => {
         setCategories(data);

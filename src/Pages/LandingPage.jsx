@@ -52,7 +52,7 @@ function LandingPage() {
                 to="/about"
                 className="hover:underline hover:text-green-300 transition px-2 py-1"
               >
-                About
+                About Us
               </Link>
               <Link
                 to="/login"

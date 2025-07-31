@@ -1,14 +1,15 @@
 import { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useCart } from "./CartContext";
 import { toast } from "react-toastify";
-
+import { BASE_URL } from "../utils";
 
 function BrowseAnimals() {
   const [animals, setAnimals] = useState([]);
   const [filter, setFilter] = useState("");
   const { cart, addToCart, removeFromCart } = useCart();
   const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const params = new URLSearchParams(location.search);
@@ -17,19 +18,20 @@ function BrowseAnimals() {
   }, [location.search]);
 
   useEffect(() => {
-    fetch("http://127.0.0.1:5000/animals")
+    fetch(`${BASE_URL}/animals`)
       .then((res) => {
         if (!res.ok) toast.error("Backend fetch failed");
         return res.json();
       })
       .then((data) => {
         setAnimals(data);
-        console.log("✅ Animals fetched:", data);
       })
       .catch((err) => {
         setAnimals();
       });
   }, []);
+
+  const token = localStorage.getItem("token");
 
   const filteredAnimals = animals.filter((animal) =>
     (animal.name + animal.breed + animal.description)
@@ -49,7 +51,9 @@ function BrowseAnimals() {
         <div className="text-4xl font-extrabold tracking-wider py-2">
           Farmart
         </div>
-        <nav className="flex space-x-12 text-lg"><Link to="/">Home</Link></nav>
+        <nav className="flex space-x-12 text-lg">
+          <Link to="/">Home</Link>
+        </nav>
       </header>
       <div className="min-h-screen bg-[#f1f8e9] font-sans flex flex-col pt-10 p-20">
         <h1 className="text-4xl font-bold mb-6 text-center">Browse Animals</h1>
@@ -97,7 +101,14 @@ function BrowseAnimals() {
                   </div>
                   <div className="flex gap-4 mt-4 items-center">
                     <button
-                      onClick={() => addToCart(animal)}
+                      onClick={() => {
+                        if (token) {
+                          addToCart(animal);
+                        } else {
+                          toast.info("Please login to proceed")
+                          navigate("/login");
+                        }
+                      }}
                       className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
                     >
                       Add to Cart

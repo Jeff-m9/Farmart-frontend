@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { BASE_URL } from "../utils";
 
 function AddAnimalPage() {
   const navigate = useNavigate();
@@ -29,7 +30,7 @@ function AddAnimalPage() {
     const payload = { ...form };
 
     try {
-      const res = await fetch("http://localhost:5000/animals", {
+      const res = await fetch(`${BASE_URL}/animals`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

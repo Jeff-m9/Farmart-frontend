@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { BASE_URL } from "../utils";
 
 function MyCart() {
   const [cartItems, setCartItems] = useState([]);
@@ -12,7 +13,7 @@ const user = JSON.parse(localStorage.getItem("user"));
 
   const fetchCart = async () => {
     try {
-      const res = await fetch("http://127.0.0.1:5000/cart", {
+      const res = await fetch(`${BASE_URL}/cart`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -41,12 +42,12 @@ const user = JSON.parse(localStorage.getItem("user"));
 
 
 
-const handlePayment=async()=>{
-  const phone =user.phone 
-  try {
-    const res
-  }
-}
+// const handlePayment=async()=>{
+//   const phone =user.phone 
+//   try {
+//     const res
+//   }
+// }
 
 
 
@@ -54,7 +55,7 @@ const handlePayment=async()=>{
   const updateQuantity = async (animal_id, quantity) => {
     if (quantity < 1) return removeItem(animal_id);
 
-    const res = await fetch(`http://127.0.0.1:5000/cart/${animal_id}`, {
+    const res = await fetch(`${BASE_URL}/cart/${animal_id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -75,7 +76,7 @@ const handlePayment=async()=>{
   };
 
   const removeItem = async (animal_id) => {
-    const res = await fetch(`http://127.0.0.1:5000/cart/${animal_id}`, {
+    const res = await fetch(`${BASE_URL}/cart/${animal_id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",

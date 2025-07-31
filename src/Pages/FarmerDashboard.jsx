@@ -2,6 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { jwtDecode } from "jwt-decode";
 import { ImageCarousel } from "./Image-carousel";
+import { BASE_URL } from "../utils";
 
 function FarmerDashboard() {
   const [animals, setAnimals] = useState([]);
@@ -33,7 +34,7 @@ function FarmerDashboard() {
 
   // Fetch animals
   useEffect(() => {
-    fetch("http://localhost:5000/animals")
+    fetch(`${BASE_URL}/animals`)
       .then((res) => res.json())
       .then((data) => {
         setAnimals(data);
@@ -47,7 +48,7 @@ function FarmerDashboard() {
 
   // Fetch categories
   useEffect(() => {
-    fetch("http://localhost:5000/categories")
+    fetch(`${BASE_URL}/animals`)
       .then((res) => res.json())
       .then((data) => {
         setCategories(data);

@@ -4,7 +4,7 @@ function ChooseRolePage() {
   const navigate = useNavigate();
 
   const handleChoose = (role) => {
-    // Save selected role to localStorage or pass via route
+    // Save selected role to localStorage
     localStorage.setItem("signup_role", role);
     navigate("/signup");
   };
