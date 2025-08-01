@@ -49,27 +49,27 @@ function BrowseAnimals() {
   return (
     <>
       {/* Header */}
-      
-     
-      <div className="min-h-screen bg-[#f1f8e9] font-sans flex flex-col pt-10 p-20">
-        <h1 className="text-4xl font-bold mb-6 text-center">Browse Animals</h1>
+
+
+      <div className="min-h-screen px-4 py-8 flex flex-col  items-centre gap-8 bg-[#f1f8e9] font-sans  ">
+        <h1 className="text-3xl   font-bold mb-6 text-center">Browse Animals</h1>
 
         <input
           type="text"
           placeholder="Search by name, breed, or description"
-          className="mb-6 p-3 border border-gray-300 rounded w-full"
+          className="w-full sm:w-2/3 md:w-1/2 border border-gray-300 rounded px-4 py-2 "
           value={filter}
           onChange={(e) => setFilter(e.target.value)}
         />
 
-        <ul className="grid grid-cols-2 md:grid-cols-3 gap-8">
+        <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 w-full ">
           {filteredAnimals.length === 0 ? (
             <p>No animals found.</p>
           ) : (
             filteredAnimals.map((animal) => (
               <li
                 key={animal.id}
-                className="bg-white rounded shadow p-6 flex space-x-6"
+                className="bg-white rounded shadow p-4 flex flex-col sm:flex-row justify-between items-center gap-4"
                 style={{
                   background:
                     "linear-gradient(to bottom, #D9E2D1 60%, #91FD80 93%, #91FD80 100%)",
@@ -78,10 +78,10 @@ function BrowseAnimals() {
                 <img
                   src={animal.image}
                   alt={animal.name}
-                  className="w-48 h-32 object-cover rounded"
+                  className=" w-full sm:w-48 h-32 object object-cover rounded"
                 />
-                <div className="flex-1 flex flex-col justify-between">
-                  <div>
+                <div className="flex flex-col gap-4 justify-between flex-1 ">
+                  <div className="flex flex-col gap-4">
                     <Link
                       to={`/animals/${animal.id}`}
                       className="text-xl font-semibold text-green-700 hover:underline"
@@ -95,7 +95,7 @@ function BrowseAnimals() {
                       Ksh {animal.price}
                     </p>
                   </div>
-                  <div className="flex gap-4 mt-4 items-center">
+                  <div className="flex  flex-wrap gap-2 mt-4 items-center justify-start">
                     <button
                       onClick={() => {
                         if (token) {
@@ -105,18 +105,18 @@ function BrowseAnimals() {
                           navigate("/login");
                         }
                       }}
-                      className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
+                      className=" bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 text-sm sm:text-base"
                     >
                       Add to Cart
                     </button>
                     {getQuantity(animal.id) > 0 && (
                       <>
-                        <span className="text-gray-600 text-sm">
+                        <span className="text-gray-600 text-xs sm:text-sm">
                           In Cart: {getQuantity(animal.id)}
                         </span>
                         <button
                           onClick={() => removeFromCart(animal.id)}
-                          className="text-red-600 text-sm underline"
+                          className="text-red-600 text-xs sm:text-sm underline "
                         >
                           Remove All
                         </button>
