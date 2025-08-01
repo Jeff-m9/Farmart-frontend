@@ -3,7 +3,6 @@ import { toast } from "react-toastify";
 import { useCart } from "./CartContext";
 import { BASE_URL } from "../utils";
 import { Phone } from "lucide-react";
-import { set } from "zod";
 
 function PaymentPage() {
   const { total } = useCart();
