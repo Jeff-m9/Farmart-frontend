@@ -17,7 +17,7 @@ export function ImageCarousel() {
   }, []);
 
   return (
-    <div className="relative h-screen w-full overflow-hidden">
+    <div className=" relative w-full h-48 sm:h-64 md:h-80 lg:h-96 overflow-hidden">
       {/* Slideshow Images */}
       {images.map((image, i) => (
         <img

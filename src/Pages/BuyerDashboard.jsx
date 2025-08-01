@@ -58,7 +58,7 @@ function BuyerDashboard() {
     <div className="min-h-screen bg-[#f1f8e9] font-sans flex flex-col">
       <main className="flex-grow">
         {/* Carousel */}
-        <div className="bg-[#f1f8e9] font-sans flex flex-col">
+        <div className="bg-[#f1f8e9] w-full font-sans flex flex-col">
           <ImageCarousel />
         </div>
 

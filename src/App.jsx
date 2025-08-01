@@ -38,7 +38,7 @@ function App() {
       <Route path="/login" element={<LoginPage />} />
       <Route path="/signup" element={<SignUpPage />} />
       <Route path="/choose-role" element={<ChooseRolePage />} />
-      <Route path="/browse" element={<BrowseAnimals />} />
+  
 
       {/* Routes with header */}
       <Route path="/adminspage" element={<AdminsPage />} />
@@ -51,6 +51,7 @@ function App() {
           </AppLayout>
         }
       />
+
       <Route
         path="/farmer-dashboard"
         element={
@@ -61,6 +62,14 @@ function App() {
       />
 
 
+<Route
+path="/browse"
+element={
+  <AppLayout>
+    <BrowseAnimals />
+  </AppLayout>
+}
+      />
 
       <Route
         path="/profile"

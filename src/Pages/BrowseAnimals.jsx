@@ -50,14 +50,7 @@ function BrowseAnimals() {
     <>
       {/* Header */}
       
-      <header className="bg-green-700/90 text-white flex justify-between items-center px-12 py-6 shadow-md sticky top-0 z-50 backdrop-blur-sm">
-        <div className="text-4xl font-extrabold tracking-wider py-2">
-          Farmart
-        </div>
-        <nav className="flex space-x-12 text-lg">
-          <Link to="/">Home</Link>
-        </nav>
-      </header>
+     
       <div className="min-h-screen bg-[#f1f8e9] font-sans flex flex-col pt-10 p-20">
         <h1 className="text-4xl font-bold mb-6 text-center">Browse Animals</h1>
 
